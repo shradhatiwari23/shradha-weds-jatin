@@ -1,53 +1,126 @@
 
-const weddingDate = new Date(
-  "2027-01-26T10:00:00+05:30"
-).getTime();
+(() => {
+  "use strict";
 
-const countdown = document.getElementById("countdown");
+  // ---------------------------------------
+  // 1. ENTER INVITATION BUTTON
+  // ---------------------------------------
 
-function updateCountdown() {
-  const now = Date.now();
-  const distance = weddingDate - now;
+  const enterButton = document.getElementById("enter-button");
+  const invitation = document.getElementById("invitation");
 
-  if (distance <= 0) {
-    countdown.textContent = "The wedding day is here! ❤️";
-    return;
+  if (enterButton && invitation) {
+    enterButton.addEventListener("click", () => {
+      invitation.hidden = false;
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      invitation.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start"
+      });
+    });
   }
 
-  const days = Math.floor(distance / 86400000);
-  const hours = Math.floor(
-    (distance % 86400000) / 3600000
-  );
-  const minutes = Math.floor(
-    (distance % 3600000) / 60000
-  );
-  const seconds = Math.floor(
-    (distance % 60000) / 1000
-  );
+  // ---------------------------------------
+  // 2. WEDDING COUNTDOWN
+  // 26 January 2027, 10:00 AM IST
+  // ---------------------------------------
 
-  const units = [
-    ["Days", days],
-    ["Hours", hours],
-    ["Minutes", minutes],
-    ["Seconds", seconds]
-  ];
+  const weddingDate = new Date(
+    "2027-01-26T10:00:00+05:30"
+  ).getTime();
 
-  countdown.replaceChildren();
+  const daysElement = document.getElementById("days");
+  const hoursElement = document.getElementById("hours");
+  const minutesElement = document.getElementById("minutes");
+  const secondsElement = document.getElementById("seconds");
+  const countdownNote = document.getElementById("countdown-note");
 
-  units.forEach(([label, value]) => {
-    const box = document.createElement("div");
-    box.className = "time-box";
+  function updateCountdown() {
+    const remaining = weddingDate - Date.now();
 
-    const number = document.createElement("strong");
-    number.textContent = String(value).padStart(2, "0");
+    if (remaining <= 0) {
+      daysElement.textContent = "00";
+      hoursElement.textContent = "00";
+      minutesElement.textContent = "00";
+      secondsElement.textContent = "00";
 
-    const caption = document.createElement("span");
-    caption.textContent = label;
+      if (countdownNote) {
+        countdownNote.textContent =
+          "Today is the day. Let the celebrations begin!";
+      }
 
-    box.append(number, caption);
-    countdown.append(box);
-  });
-}
+      return;
+    }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+    const days = Math.floor(
+      remaining / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+      (remaining / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+      (remaining / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+      (remaining / 1000) % 60
+    );
+
+    daysElement.textContent = String(days).padStart(2, "0");
+    hoursElement.textContent = String(hours).padStart(2, "0");
+    minutesElement.textContent = String(minutes).padStart(2, "0");
+    secondsElement.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateCountdown();
+
+  window.setInterval(updateCountdown, 1000);
+
+  // ---------------------------------------
+  // 3. SCROLL REVEAL ANIMATIONS
+  // ---------------------------------------
+
+  const revealItems = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealItems.forEach((item) => {
+      observer.observe(item);
+    });
+  } else {
+    revealItems.forEach((item) => {
+      item.classList.add("is-visible");
+    });
+  }
+
+  // ---------------------------------------
+  // 4. VIDEO FALLBACK
+  // ---------------------------------------
+
+  const heroVideo = document.querySelector(".hero-video");
+
+  if (heroVideo) {
+    heroVideo.addEventListener("error", () => {
+      heroVideo.style.display = "none";
+    });
+  }
+})();
