@@ -2,294 +2,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1B3A2F">
+  <meta name="description" content="Join Shradha and Jatin as they begin their forever in Rishikesh.">
+  <title>Shradha & Jatin | The Beginning of Forever</title>
 
-  <meta name="theme-color" content="#EFE4D2" />
-  <meta name="description"
-        content="Join Shradha and Jatin in Rishikesh to celebrate their wedding on 25–26 January 2027." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <title>Shradha &amp; Jatin | Our Wedding</title>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
-<body class="landing-locked">
-
-  <!-- ==========================================
-       FULL-SCREEN WEDDING VIDEO LANDING PAGE
-       ========================================== -->
-
-  <section id="landing"
-           class="landing"
-           aria-label="Shradha and Jatin's wedding invitation">
-
-    <!-- Background video -->
-    <video
-      id="landingVideo"
-      class="landing-video"
-      playsinline
-      preload="metadata"
-      aria-label="Shradha and Jatin's wedding invitation video">
-
-      <source src="assets/landing-video.mp4" type="video/mp4" />
-
-      Your browser does not support HTML video.
+<body>
+  <!-- WELCOME / LANDING PAGE -->
+  <section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="assets/landing-video.mp4" type="video/mp4">
     </video>
 
-    <!-- Overlay for readable text -->
-    <div class="landing-overlay" aria-hidden="true"></div>
+    <div class="hero-overlay"></div>
 
-    <!-- Centred invitation button -->
-    <div class="landing-content">
+    <div class="hero-content">
+      <p class="eyebrow">WITH THE BLESSINGS OF OUR FAMILIES</p>
+      <p class="ornament">✳</p>
 
-      <p class="landing-kicker">॥ श्री गणेशाय नमः ॥</p>
+      <h1>Shradha <span>&</span> Jatin</h1>
 
-      <p class="landing-names">SHRADHA &amp; JATIN</p>
-
-      <button
-        id="openWeddingButton"
-        class="open-wedding-button"
-        type="button">
-        Click to Open <span aria-hidden="true">↗</span>
-      </button>
-
-      <p id="landingStatus"
-         class="landing-status"
-         aria-live="polite">
-        Our story, our people, our forever.
+      <p class="hero-subtitle">
+        A story that was always going to be us.
       </p>
 
-      <p class="landing-date">25 — 26 JANUARY 2027</p>
+      <div class="gold-line"></div>
 
+      <p class="hero-date">25 – 26 JANUARY 2027 · RISHIKESH</p>
+
+      <button id="enter-button" class="button button-light" type="button">
+        Enter Our Invitation <span>↓</span>
+      </button>
+
+      <p class="hero-note">A little love, a lifetime to go.</p>
     </div>
+
+    <div class="scroll-indicator">MADE WITH LOVE</div>
   </section>
 
+  <!-- MAIN INVITATION -->
+  <main id="invitation" hidden>
 
-  <!-- ==========================================
-       MAIN WEDDING WEBSITE
-       Hidden until the video finishes
-       ========================================== -->
+    <!-- INVOCATION -->
+    <section class="intro section reveal">
+      <p class="sanskrit">॥ ॐ श्री गणेशाय नमः ॥</p>
+      <p class="eyebrow">TOGETHER WITH OUR FAMILIES</p>
 
-  <div id="mainWebsite" hidden>
+      <h2>Two stories.<br>One beautiful beginning.</h2>
 
-    <!-- HERO / INVITATION COVER -->
+      <p class="intro-text">
+        With grateful hearts and the blessings of our loved ones,
+        we invite you to celebrate as we begin our next chapter together.
+      </p>
 
-    <header class="hero">
+      <p class="script-names">Shradha & Jatin</p>
+      <p class="small-date">25 – 26 JANUARY 2027</p>
+    </section>
 
-      <p class="eyebrow">A NEW CHAPTER BEGINS</p>
+    <!-- OUR STORY -->
+    <section class="story section reveal" id="our-story">
+      <div class="story-art">
+        <div class="art-circle"></div>
+        <span class="art-sun">☼</span>
+        <span class="art-leaf leaf-one">❧</span>
+        <span class="art-leaf leaf-two">❧</span>
+        <p>IT WAS ALWAYS<br>GOING TO BE US</p>
+      </div>
 
-      <p class="invocation">॥ श्री गणेशाय नमः ॥</p>
-
-      <p class="script">Two paths. One beautiful story.</p>
-
-      <h1>Shradha <span>&amp;</span> Jatin</h1>
-
-      <p class="hero-date">25 — 26 JANUARY 2027</p>
-
-      <p class="hero-location">Rishikesh, Uttarakhand</p>
-
-      <a class="button" href="#invitation">
-        Open our invitation ↓
-      </a>
-
-    </header>
-
-
-    <main>
-
-      <!-- INVITATION -->
-
-      <section id="invitation" class="section invitation">
-
-        <p class="eyebrow">WITH LOVE AND BLESSINGS</p>
-
-        <h2>Our families invite you</h2>
+      <div class="story-content">
+        <p class="eyebrow">A NOTE FROM US</p>
+        <h2>Some things find their way back.</h2>
 
         <p>
-          With the blessings of our families and the grace of the Almighty,
-          we invite you to celebrate the wedding of
-        </p>
-
-        <h3>Shradha Tiwari</h3>
-
-        <p>Daughter of [Bride's parents' names]</p>
-
-        <p class="ampersand">with</p>
-
-        <h3>Jatin Prakash</h3>
-
-        <p>Son of [Groom's parents' names]</p>
-
-        <p>
-          Join us for two days of traditions, laughter, music
-          and the beginning of forever.
-        </p>
-
-      </section>
-
-
-      <!-- OUR STORY -->
-
-      <section class="section story">
-
-        <p class="eyebrow">OUR STORY</p>
-
-        <h2>It was always going to be us.</h2>
-
-        <p>
-          We first crossed paths in 2014. Life took us on different
-          journeys, until we found our way back to each other in
-          Bangalore in 2023.
+          Life took us on different roads, through different seasons,
+          until it brought us back to each other. What began as a
+          familiar story became a choice, a partnership, and a love
+          that feels like home.
         </p>
 
         <p>
-          Some stories aren't about meeting someone new.
-          They're about finding your way back to someone who
-          was always meant to be part of your story.
+          Now, with the mountains around us and the Ganga flowing
+          nearby, we'd love to have our favourite people beside us
+          for the beginning of forever.
         </p>
 
-      </section>
+        <p class="signature">With love, Shradha & Jatin</p>
+      </div>
+    </section>
 
+    <!-- COUNTDOWN -->
+    <section class="countdown-section section reveal">
+      <p class="eyebrow">THE BIG DAY IS APPROACHING</p>
+      <h2>Counting down to forever</h2>
 
-      <!-- WEDDING COUNTDOWN -->
-
-      <section class="section countdown-section">
-
-        <p class="eyebrow">THE COUNTDOWN</p>
-
-        <h2>Until we say I do</h2>
-
-        <div id="countdown" aria-live="polite">
-          Counting down to our wedding...
+      <div class="countdown" aria-live="polite">
+        <div class="time-unit">
+          <span id="days">00</span>
+          <small>Days</small>
         </div>
 
-      </section>
+        <div class="time-unit">
+          <span id="hours">00</span>
+          <small>Hours</small>
+        </div>
 
+        <div class="time-unit">
+          <span id="minutes">00</span>
+          <small>Minutes</small>
+        </div>
 
-      <!-- WEDDING EVENTS -->
+        <div class="time-unit">
+          <span id="seconds">00</span>
+          <small>Seconds</small>
+        </div>
+      </div>
 
-      <section class="section events">
+      <p id="countdown-note">Until we say "I do".</p>
+    </section>
 
-        <p class="eyebrow">SAVE THE DATES</p>
+    <!-- EVENTS -->
+    <section class="events section reveal" id="events">
+      <p class="eyebrow">SAVE THE DATES</p>
+      <h2>Wedding festivities</h2>
 
-        <h2>Two days. A lifetime of memories.</h2>
+      <p class="section-intro">
+        Two days, our favourite people, and memories we'll keep forever.
+      </p>
 
-        <article class="event">
-
-          <p class="event-date">
-            25 JANUARY 2027 · 1 PM ONWARDS
-          </p>
-
+      <div class="event-grid">
+        <article class="event-card">
+          <span class="event-number">01</span>
+          <p class="event-date">MONDAY · 25 JANUARY</p>
           <h3>Haldi</h3>
-
-          <p>
-            Sunshine, marigolds, blessings and all things yellow.
-          </p>
-
+          <p class="event-time">1:00 PM onwards</p>
+          <div class="gold-line"></div>
+          <p>A little sunshine, marigolds, laughter and all the love.</p>
         </article>
 
-
-        <article class="event">
-
-          <p class="event-date">
-            25 JANUARY 2027 · 7 PM ONWARDS
-          </p>
-
+        <article class="event-card featured">
+          <span class="event-number">02</span>
+          <p class="event-date">MONDAY · 25 JANUARY</p>
           <h3>Sangeet</h3>
-
-          <p>
-            Music, dancing and our favourite people under one roof.
-          </p>
-
+          <p class="event-time">7:00 PM onwards</p>
+          <div class="gold-line"></div>
+          <p>An evening for music, dancing and happy chaos.</p>
         </article>
 
-
-        <article class="event">
-
-          <p class="event-date">
-            26 JANUARY 2027 · 10 AM ONWARDS
-          </p>
-
+        <article class="event-card">
+          <span class="event-number">03</span>
+          <p class="event-date">TUESDAY · 26 JANUARY</p>
           <h3>The Wedding</h3>
-
-          <p>
-            Two families, sacred vows and forever by the Ganga.
-          </p>
-
+          <p class="event-time">10:00 AM onwards</p>
+          <div class="gold-line"></div>
+          <p>With blessings and promises, we begin our forever.</p>
         </article>
+      </div>
+    </section>
 
-      </section>
+    <!-- VENUE -->
+    <section class="venue section reveal" id="venue">
+      <div class="venue-image">
+        <img
+          src="assets/venue.jpg"
+          alt="Wedding destination in Rishikesh"
+          loading="lazy"
+          onerror="this.style.display='none'">
+      </div>
 
+      <div class="venue-content">
+        <p class="eyebrow">WHERE IT ALL HAPPENS</p>
+        <h2>Rishikesh, with love.</h2>
 
-      <!-- VENUE AND DIRECTIONS -->
-
-      <section class="section location">
-
-        <p class="eyebrow">MEET US IN RISHIKESH</p>
-
-        <h2>Our wedding destination</h2>
-
-        <h3>DLS Divine River Resort &amp; Spa</h3>
-
-        <p>Rishikesh, Uttarakhand</p>
-
-        <a
-          class="button"
-          href="https://www.google.com/maps/search/?api=1&amp;query=DLS+Divine+River+Resort+Spa+Rishikesh"
-          target="_blank"
-          rel="noopener noreferrer">
-          Get directions ↗
-        </a>
-
-      </section>
-
-
-      <!-- RSVP -->
-
-      <section class="section rsvp">
-
-        <p class="eyebrow">WE HOPE YOU CAN MAKE IT</p>
-
-        <h2>Your presence means everything.</h2>
+        <h3>DLS Divine River Resort & Spa</h3>
 
         <p>
-          We cannot wait to celebrate this new chapter with you.
+          We're gathering in Rishikesh for two days of celebration,
+          surrounded by the spirit of the mountains and the river.
         </p>
 
-        <a class="button" href="YOUR_RSVP_LINK">
-          RSVP here
+        <a
+          class="button button-dark"
+          href="https://www.google.com/maps/search/?api=1&query=DLS%20Divine%20River%20Resort%20%26%20Spa%20Rishikesh"
+          target="_blank"
+          rel="noopener noreferrer">
+          Get Directions ↗
         </a>
 
-      </section>
+        <p class="venue-note">
+          Please allow enough time for your journey to the venue.
+        </p>
+      </div>
+    </section>
 
-    </main>
+    <!-- GUEST NOTES -->
+    <section class="details section reveal">
+      <p class="eyebrow">A FEW LITTLE NOTES</p>
+      <h2>All you need to know</h2>
 
+      <div class="details-grid">
+        <article>
+          <span class="detail-icon">✧</span>
+          <h3>Dress with joy</h3>
+          <p>
+            Festive Indian wear is always welcome.
+            Come comfortable and ready to celebrate.
+          </p>
+        </article>
 
-    <!-- FOOTER -->
+        <article>
+          <span class="detail-icon">♡</span>
+          <h3>Bring your smiles</h3>
+          <p>
+            Your presence means the world to us.
+            The best gift is having you there.
+          </p>
+        </article>
 
-    <footer>
+        <article>
+          <span class="detail-icon">⌂</span>
+          <h3>Need a hand?</h3>
+          <p>
+            For travel or event questions, please contact
+            the family hosting your invitation.
+          </p>
+        </article>
+      </div>
+    </section>
 
-      <p>Made with love, for our favourite people.</p>
+    <!-- CLOSING -->
+    <section class="closing section reveal">
+      <p class="closing-ornament">❧</p>
+      <p class="eyebrow">UNTIL WE MEET</p>
 
-      <h2>S &amp; J</h2>
+      <h2>Come for the wedding.<br>Stay for the memories.</h2>
 
-      <p>25–26 January 2027 · Rishikesh</p>
+      <p>
+        We can't wait to laugh, dance, hug a little longer,
+        and celebrate this next chapter with you.
+      </p>
 
-    </footer>
+      <p class="closing-names">
+        With all our love,<br>
+        <span>Shradha & Jatin</span>
+      </p>
 
-  </div>
+      <p class="small-date">25 – 26 JANUARY 2027 · RISHIKESH</p>
+    </section>
 
+  </main>
 
-  <!-- JavaScript: countdown and video landing behaviour -->
-  <script src="script.js"></script>
-
+  <footer class="footer">
+    <a href="#home" class="footer-logo">S <span>&</span> J</a>
+    <p>Made with love, for our favourite people.</p>
+    <a href="#home" class="back-top">BACK TO TOP ↑</a>
+  </footer>
 </body>
 </html>
