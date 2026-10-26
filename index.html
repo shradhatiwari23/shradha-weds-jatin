@@ -1,269 +1,402 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1B3A2F">
-  <meta name="description" content="Join Shradha and Jatin as they begin their forever in Rishikesh.">
-  <title>Shradha & Jatin | The Beginning of Forever</title>
-
+  <title>Shradha weds Jatin | Royal Wedding Invitation</title>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Yatra+One&family=Marcellus&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <!-- WELCOME / LANDING PAGE -->
-  <section class="hero" id="home">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="assets/landing-video.mp4" type="video/mp4">
-    </video>
 
-    <div class="hero-overlay"></div>
+  <!-- Audio Background Player & Toggle -->
+  <audio id="weddingAudio" src="Assets/sound/wedding-ambient.mp3" preload="auto" loop></audio>
+  <button id="audioToggle" class="audio-control-btn" aria-label="Toggle Sangeet Music">
+    <i class="fa-solid fa-volume-xmark" id="audioIcon"></i>
+    <span class="audio-label">Mangal Dhwani</span>
+  </button>
 
-    <div class="hero-content">
-      <p class="eyebrow">WITH THE BLESSINGS OF OUR FAMILIES</p>
-      <p class="ornament">✳</p>
+  <!-- ============================================== -->
+  <!-- HERO GATEFOLD INVITATION SECTION               -->
+  <!-- ============================================== -->
+  <header class="invitation-hero" id="invitationHero">
+    <div class="card-perspective-viewport">
+      <div class="wedding-card-3d" id="weddingCard">
 
-      <h1>Shradha <span>&</span> Jatin</h1>
+        <!-- LAYER 2: INSIDE REVEALED CARD -->
+        <div class="card-inner-layer" id="cardInner">
+          <img src="Assets/images/rishikesh-ghats-painting.png" alt="Holy Ganga Ghats at Twilight" class="ghats-bg-artwork">
+          <div class="ghats-overlay-gradient"></div>
+          
+          <div class="reveal-content-container">
+            <span class="vedic-mini-title">॥ श्री गणेशाय नमः ॥</span>
+            <div class="names-block">
+              <h1 class="couple-hero-names">
+                <span class="bride-name">Shradha</span>
+                <span class="weds-conjunction">weds</span>
+                <span class="groom-name">Jatin</span>
+              </h1>
+            </div>
+            <p class="wedding-date-tagline">26th January 2027 • Rishikesh, Uttarakhand</p>
+            
+            <a href="#mangalacharan" class="explore-details-btn">
+              <span>View Wedding Itinerary</span>
+              <i class="fa-solid fa-angle-down"></i>
+            </a>
+          </div>
+        </div>
 
-      <p class="hero-subtitle">
-        A story that was always going to be us.
-      </p>
+        <!-- LAYER 3: 3D GATEFOLD FLAPS -->
+        <!-- Left Flap: Bihar & Madhubani Side -->
+        <div class="gatefold-flap left-flap" id="leftFlap">
+          <img src="Assets/images/left-flap-bihar-madhubani.png" alt="Bihar Madhubani Artwork" class="flap-artwork-img">
+        </div>
 
-      <div class="gold-line"></div>
+        <!-- Right Flap: West Bengal Side -->
+        <div class="gatefold-flap right-flap" id="rightFlap">
+          <img src="Assets/images/right-flap-west-bengal.png" alt="West Bengal Alpona Artwork" class="flap-artwork-img">
+        </div>
 
-      <p class="hero-date">25 – 26 JANUARY 2027 · RISHIKESH</p>
+        <!-- LAYER 4: MAULI THREAD FASTENER & INTERACTIVE TRIGGER -->
+        <div class="fastener-assembly" id="fastenerAssembly">
+          <div class="thread-horizontal-wrap">
+            <img src="Assets/images/thread-band-left.png" alt="Mauli Cord Left" class="thread-strand left-strand" id="leftStrand">
+            <img src="Assets/images/thread-band-right.png" alt="Mauli Cord Right" class="thread-strand right-strand" id="rightStrand">
+          </div>
 
-      <button id="enter-button" class="button button-light" type="button">
-        Enter Our Invitation <span>↓</span>
-      </button>
+          <div class="center-knot-wrapper" id="centerKnotWrapper">
+            <img src="Assets/images/touch-indicator-pulse.png" alt="Tap to Open" class="touch-pulse-indicator" id="pulseIndicator">
+            <img src="Assets/images/mauli-bow-center.png" alt="Sacred Mauli Bow Knot" class="mauli-bow-img" id="mauliBow">
+            <img src="Assets/images/mauli-tassels.png" alt="Mauli Tassels" class="mauli-tassels-img" id="mauliTassels">
+          </div>
+        </div>
 
-      <p class="hero-note">A little love, a lifetime to go.</p>
+      </div>
     </div>
+  </header>
 
-    <div class="scroll-indicator">MADE WITH LOVE</div>
-  </section>
+  <!-- ============================================== -->
+  <!-- MAIN WEDDING INVITATION WEBSITE CONTENT        -->
+  <!-- ============================================== -->
+  <main class="wedding-site-body" id="siteBody">
 
-  <!-- MAIN INVITATION -->
-  <main id="invitation" hidden>
-
-    <!-- INVOCATION -->
-    <section class="intro section reveal">
-      <p class="sanskrit">॥ ॐ श्री गणेशाय नमः ॥</p>
-      <p class="eyebrow">TOGETHER WITH OUR FAMILIES</p>
-
-      <h2>Two stories.<br>One beautiful beginning.</h2>
-
-      <p class="intro-text">
-        With grateful hearts and the blessings of our loved ones,
-        we invite you to celebrate as we begin our next chapter together.
+    <!-- Section 1: Vedic Mangalacharan -->
+    <section class="section-container mangalacharan-section" id="mangalacharan">
+      <div class="om-symbol-header">
+        <i class="fa-solid fa-om"></i>
+      </div>
+      <h2 class="shloka-main">॥ श्री गणेशाय नमः ॥</h2>
+      <p class="sanskrit-shloka">
+        वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>
+        निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
       </p>
-
-      <p class="script-names">Shradha & Jatin</p>
-      <p class="small-date">25 – 26 JANUARY 2027</p>
-    </section>
-
-    <!-- OUR STORY -->
-    <section class="story section reveal" id="our-story">
-      <div class="story-art">
-        <div class="art-circle"></div>
-        <span class="art-sun">☼</span>
-        <span class="art-leaf leaf-one">❧</span>
-        <span class="art-leaf leaf-two">❧</span>
-        <p>IT WAS ALWAYS<br>GOING TO BE US</p>
+      <div class="shloka-divider">
+        <span class="gold-line"></span>
+        <i class="fa-solid fa-spa gold-icon"></i>
+        <span class="gold-line"></span>
       </div>
-
-      <div class="story-content">
-        <p class="eyebrow">A NOTE FROM US</p>
-        <h2>Some things find their way back.</h2>
-
-        <p>
-          Life took us on different roads, through different seasons,
-          until it brought us back to each other. What began as a
-          familiar story became a choice, a partnership, and a love
-          that feels like home.
-        </p>
-
-        <p>
-          Now, with the mountains around us and the Ganga flowing
-          nearby, we'd love to have our favourite people beside us
-          for the beginning of forever.
-        </p>
-
-        <p class="signature">With love, Shradha & Jatin</p>
-      </div>
-    </section>
-
-    <!-- COUNTDOWN -->
-    <section class="countdown-section section reveal">
-      <p class="eyebrow">THE BIG DAY IS APPROACHING</p>
-      <h2>Counting down to forever</h2>
-
-      <div class="countdown" aria-live="polite">
-        <div class="time-unit">
-          <span id="days">00</span>
-          <small>Days</small>
-        </div>
-
-        <div class="time-unit">
-          <span id="hours">00</span>
-          <small>Hours</small>
-        </div>
-
-        <div class="time-unit">
-          <span id="minutes">00</span>
-          <small>Minutes</small>
-        </div>
-
-        <div class="time-unit">
-          <span id="seconds">00</span>
-          <small>Seconds</small>
-        </div>
-      </div>
-
-      <p id="countdown-note">Until we say "I do".</p>
-    </section>
-
-    <!-- EVENTS -->
-    <section class="events section reveal" id="events">
-      <p class="eyebrow">SAVE THE DATES</p>
-      <h2>Wedding festivities</h2>
-
-      <p class="section-intro">
-        Two days, our favourite people, and memories we'll keep forever.
+      <p class="shloka-meaning">
+        “With the divine blessings of our ancestors and the almighty, we invite you to join us in celebrating the auspicious union of hearts and families.”
       </p>
+    </section>
 
-      <div class="event-grid">
-        <article class="event-card">
-          <span class="event-number">01</span>
-          <p class="event-date">MONDAY · 25 JANUARY</p>
-          <h3>Haldi</h3>
-          <p class="event-time">1:00 PM onwards</p>
-          <div class="gold-line"></div>
-          <p>A little sunshine, marigolds, laughter and all the love.</p>
+    <!-- Section 2: Couple Lineage & Family -->
+    <section class="section-container lineage-section" id="lineage">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">शुभ विवाह सूत्र</h3>
+        <h2 class="main-section-title">The Bride & Groom</h2>
+      </div>
+
+      <div class="lineage-dual-grid">
+        <!-- Groom Card -->
+        <div class="family-card groom-card">
+          <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
+          <h3 class="member-name">Chiranjeevi Jatin Prakash</h3>
+          <p class="kinship-relation">Suputra of</p>
+          <p class="parent-names">Mrs. Usha Kumari & Mr. Vinod Kumar</p>
+          <div class="hometown-pill">
+            <i class="fa-solid fa-location-dot"></i> Muzaffarpur, Bihar
+          </div>
+        </div>
+
+        <!-- Union Kalash Icon -->
+        <div class="lineage-center-emblem">
+          <div class="sacred-knot-emblem">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+
+        <!-- Bride Card -->
+        <div class="family-card bride-card">
+          <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
+          <h3 class="member-name">Ayushmati Shradha Tiwari</h3>
+          <p class="kinship-relation">Suputri of</p>
+          <p class="parent-names">Mrs. Geeta Tiwari & Mr. Arvind Tiwari</p>
+          <p class="grandparent-names">Pautri of Mrs. Krishna Devi Tiwari & Late Tarak Nath Tiwari</p>
+          <div class="hometown-pill">
+            <i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Live Countdown -->
+    <section class="section-container countdown-section" id="countdown">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">शुभ घड़ी</h3>
+        <h2 class="main-section-title">Countdown to the Sacred Vows</h2>
+      </div>
+
+      <div class="countdown-clock-grid" id="clockGrid">
+        <div class="time-block">
+          <span class="time-digit" id="daysVal">00</span>
+          <span class="time-label">Days</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-digit" id="hoursVal">00</span>
+          <span class="time-label">Hours</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-digit" id="minutesVal">00</span>
+          <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-digit" id="secondsVal">00</span>
+          <span class="time-label">Seconds</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Event Itinerary -->
+    <section class="section-container itinerary-section" id="itinerary">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">मांगलिक कार्यक्रम</h3>
+        <h2 class="main-section-title">Celebration Itinerary</h2>
+      </div>
+
+      <div class="itinerary-cards-grid">
+        <!-- Haldi -->
+        <article class="ceremony-card haldi-card">
+          <div class="ceremony-badge">Day 1 • Afternoon</div>
+          <h3 class="ceremony-title">Haldi Ceremony</h3>
+          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 1:00 PM</p>
+          <p class="ceremony-desc">Fragrant turmeric pastes, joyful splashes of marigold petals, and traditional folklore songs beside the Ganga.</p>
+          <div class="ceremony-attire">
+            <strong>Dress Code:</strong> Festive Yellows & Sunlit Mustard
+          </div>
+          <button class="add-cal-btn" onclick="downloadIcs('Haldi Ceremony', '2027-01-25T13:00:00', '2027-01-25T16:00:00', 'Haldi Ceremony of Shradha & Jatin at DLS Divine River Resort')">
+            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+          </button>
         </article>
 
-        <article class="event-card featured">
-          <span class="event-number">02</span>
-          <p class="event-date">MONDAY · 25 JANUARY</p>
-          <h3>Sangeet</h3>
-          <p class="event-time">7:00 PM onwards</p>
-          <div class="gold-line"></div>
-          <p>An evening for music, dancing and happy chaos.</p>
+        <!-- Sangeet -->
+        <article class="ceremony-card sangeet-card">
+          <div class="ceremony-badge">Day 1 • Evening</div>
+          <h3 class="ceremony-title">Sangeet & Cocktail</h3>
+          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 7:00 PM</p>
+          <p class="ceremony-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
+          <div class="ceremony-attire">
+            <strong>Dress Code:</strong> Indo-Western Elegance & Glitz
+          </div>
+          <button class="add-cal-btn" onclick="downloadIcs('Sangeet Night', '2027-01-25T19:00:00', '2027-01-25T23:59:00', 'Sangeet of Shradha & Jatin at DLS Divine River Resort')">
+            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+          </button>
         </article>
 
-        <article class="event-card">
-          <span class="event-number">03</span>
-          <p class="event-date">TUESDAY · 26 JANUARY</p>
-          <h3>The Wedding</h3>
-          <p class="event-time">10:00 AM onwards</p>
-          <div class="gold-line"></div>
-          <p>With blessings and promises, we begin our forever.</p>
+        <!-- Shubh Vivah -->
+        <article class="ceremony-card wedding-card featured-wedding">
+          <div class="ceremony-badge gold-badge">Day 2 • Auspicious Muhurat</div>
+          <h3 class="ceremony-title">Shubh Vivah (Wedding)</h3>
+          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 26th January 2027 • 10:00 AM</p>
+          <p class="ceremony-desc">The sacred Saat Phere around the Agni, Kanyadaan, and Vedic nuptials on the serene riverbanks of Rishikesh.</p>
+          <div class="ceremony-attire">
+            <strong>Dress Code:</strong> Royal Traditional Indian Attire
+          </div>
+          <button class="add-cal-btn" onclick="downloadIcs('Shubh Vivah - Shradha & Jatin', '2027-01-26T10:00:00', '2027-01-26T14:30:00', 'Wedding Vows of Shradha & Jatin at DLS Divine River Resort')">
+            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+          </button>
         </article>
       </div>
     </section>
 
-    <!-- VENUE -->
-    <section class="venue section reveal" id="venue">
-      <div class="venue-image">
-        <img
-          src="assets/venue.jpg"
-          alt="Wedding destination in Rishikesh"
-          loading="lazy"
-          onerror="this.style.display='none'">
+    <!-- Section 5: Venue & Directions -->
+    <section class="section-container venue-section" id="venue">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">स्थान एवं मार्ग</h3>
+        <h2 class="main-section-title">The Wedding Destination</h2>
       </div>
 
-      <div class="venue-content">
-        <p class="eyebrow">WHERE IT ALL HAPPENS</p>
-        <h2>Rishikesh, with love.</h2>
-
-        <h3>DLS Divine River Resort & Spa</h3>
-
-        <p>
-          We're gathering in Rishikesh for two days of celebration,
-          surrounded by the spirit of the mountains and the river.
-        </p>
-
-        <a
-          class="button button-dark"
-          href="https://www.google.com/maps/search/?api=1&query=DLS%20Divine%20River%20Resort%20%26%20Spa%20Rishikesh"
-          target="_blank"
-          rel="noopener noreferrer">
-          Get Directions ↗
-        </a>
-
-        <p class="venue-note">
-          Please allow enough time for your journey to the venue.
-        </p>
-      </div>
-    </section>
-
-    <!-- GUEST NOTES -->
-    <section class="details section reveal">
-      <p class="eyebrow">A FEW LITTLE NOTES</p>
-      <h2>All you need to know</h2>
-
-      <div class="details-grid">
-        <article>
-          <span class="detail-icon">✧</span>
-          <h3>Dress with joy</h3>
-          <p>
-            Festive Indian wear is always welcome.
-            Come comfortable and ready to celebrate.
+      <div class="venue-card-wrapper">
+        <div class="venue-info-box">
+          <h3 class="resort-title">DLS Divine River Resort & Spa</h3>
+          <p class="resort-address">
+            <i class="fa-solid fa-map-pin"></i> Mohan Chatti, Silogi Road, Dugda Jogyana, Rishikesh, Uttarakhand – 249304
           </p>
-        </article>
-
-        <article>
-          <span class="detail-icon">♡</span>
-          <h3>Bring your smiles</h3>
-          <p>
-            Your presence means the world to us.
-            The best gift is having you there.
+          <p class="resort-note">
+            Nestled peacefully amidst the Garhwal Himalayan foothills overlooking the pristine waters of the Ganga valley.
           </p>
-        </article>
 
-        <article>
-          <span class="detail-icon">⌂</span>
-          <h3>Need a hand?</h3>
-          <p>
-            For travel or event questions, please contact
-            the family hosting your invitation.
-          </p>
-        </article>
+          <div class="venue-action-buttons">
+            <a href="https://maps.app.goo.gl/M8cW4D4udkkTBzdm6" target="_blank" rel="noopener noreferrer" class="primary-cta-btn">
+              <i class="fa-solid fa-diamond-turn-right"></i> Open in Google Maps
+            </a>
+            <button class="secondary-vcf-btn" id="downloadContactCard">
+              <i class="fa-solid fa-address-card"></i> Save Contact (.VCF)
+            </button>
+          </div>
+        </div>
+
+        <div class="venue-map-embed">
+          <iframe 
+            title="DLS Divine River Resort Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110546.51862597464!2d78.336495!3d30.086928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3909163e7c81dcb3%3A0x6b63c7891392dfb3!2sDLS%20Divine%20River%20Resort%20and%20Spa!5e0!3m2!1sen!2sin!4v1700000000000"
+            width="100%" 
+            height="360" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
     </section>
 
-    <!-- CLOSING -->
-    <section class="closing section reveal">
-      <p class="closing-ornament">❧</p>
-      <p class="eyebrow">UNTIL WE MEET</p>
+    <!-- Section 6: Logistics & Travel Guide -->
+    <section class="section-container logistics-section" id="travel">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">ध्यान दें / यात्रा मार्गदर्शिका</h3>
+        <h2 class="main-section-title">How to Reach Rishikesh</h2>
+      </div>
 
-      <h2>Come for the wedding.<br>Stay for the memories.</h2>
+      <div class="travel-modes-grid">
+        <div class="travel-box">
+          <div class="travel-icon"><i class="fa-solid fa-plane-departure"></i></div>
+          <h4>By Air</h4>
+          <p>Fly into <strong>Jolly Grant Airport, Dehradun (DED)</strong> (approx. 40 km from the venue). Pre-booked shuttles & taxis are readily available to Mohan Chatti.</p>
+        </div>
 
-      <p>
-        We can't wait to laugh, dance, hug a little longer,
-        and celebrate this next chapter with you.
-      </p>
+        <div class="travel-box">
+          <div class="travel-icon"><i class="fa-solid fa-train"></i></div>
+          <h4>By Train</h4>
+          <p>Arrive at <strong>Haridwar Junction (HW)</strong> or <strong>Yog Nagari Rishikesh (YNRK)</strong>. The resort is an easy scenic 1-hour mountain drive from the station.</p>
+        </div>
 
-      <p class="closing-names">
-        With all our love,<br>
-        <span>Shradha & Jatin</span>
-      </p>
+        <div class="travel-box">
+          <div class="travel-icon"><i class="fa-solid fa-car"></i></div>
+          <h4>By Road</h4>
+          <p>An approximate 5 to 6-hour smooth journey from Delhi-NCR via the Delhi-Meerut Expressway and NH 334 through Meerut, Muzaffarnagar & Haridwar.</p>
+        </div>
+      </div>
 
-      <p class="small-date">25 – 26 JANUARY 2027 · RISHIKESH</p>
+      <div class="weather-notice-banner">
+        <i class="fa-solid fa-temperature-low"></i>
+        <span><strong>Winter Note:</strong> Rishikesh experiences pleasant sunny afternoons (~20°C) and brisk, chilly evenings (~7°C) in late January. Please carry warm shawls, jackets, and formal winter layers.</span>
+      </div>
     </section>
+
+    <!-- Section 7: Warm Wishes & Family Tributes -->
+    <section class="section-container tributes-section" id="tributes">
+      <div class="kid-quote-callout">
+        <p class="quote-hindi">"मेरे भैया और दीदी की शादी में जलूल-जलूल आना!"</p>
+        <span class="quote-author">— With love from all the children of Tiwari & Prakash families</span>
+      </div>
+
+      <div class="well-wishers-box">
+        <h3 class="wishes-title">आपकी प्रतीक्षा में (Awaiting Your Blessings)</h3>
+        <p class="compliments-text">With best compliments & warmest regards from:</p>
+        <div class="compliment-families">
+          <div class="fam-col">
+            <strong>Tiwari Family</strong>
+            <span>Friends & Relatives (Kolkata & Patna)</span>
+          </div>
+          <div class="fam-divider">•</div>
+          <div class="fam-col">
+            <strong>Prakash Family</strong>
+            <span>Friends & Relatives (Muzaffarpur & Delhi)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: RSVP Form -->
+    <section class="section-container rsvp-section" id="rsvp">
+      <div class="section-heading-wrap">
+        <h3 class="sub-heading-kalyanam">सादर निमंत्रण</h3>
+        <h2 class="main-section-title">RSVP</h2>
+        <p class="rsvp-sub">Please confirm your kind presence by December 15, 2026 to help us curate your stay seamlessly.</p>
+      </div>
+
+      <form id="rsvpForm" class="rsvp-form-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guestName">Full Name *</label>
+            <input type="text" id="guestName" required placeholder="e.g. Ramesh Chandra Sharma">
+          </div>
+          <div class="form-group">
+            <label for="guestPhone">Mobile / WhatsApp Number *</label>
+            <input type="tel" id="guestPhone" required placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guestAttendance">Will you be attending? *</label>
+            <select id="guestAttendance" required>
+              <option value="Yes, joyfully attending all events">Yes, joyfully attending all events</option>
+              <option value="Attending Wedding Ceremony only">Attending Wedding Ceremony only</option>
+              <option value="Regretfully unable to attend">Regretfully unable to attend</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guestCount">Total Number of Guests *</label>
+            <select id="guestCount" required>
+              <option value="1">1 Person</option>
+              <option value="2">2 Persons</option>
+              <option value="3">3 Persons</option>
+              <option value="4+">Family (4+ Persons)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="guestWishes">Warm Wishes & Blessings for the Couple</label>
+          <textarea id="guestWishes" rows="3" placeholder="Write your auspicious blessings..."></textarea>
+        </div>
+
+        <button type="submit" class="rsvp-submit-btn">
+          <span>Send Your Confirmation</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+
+        <div id="rsvpSuccessMsg" class="rsvp-success-banner" style="display: none;">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Thank you! Your RSVP has been received with love and folded hands.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="wedding-footer">
+      <p class="hastakshar">Shradha & Jatin • 26.01.2027 • Rishikesh</p>
+      <p class="blessing-footer">॥ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥</p>
+    </footer>
 
   </main>
 
-  <footer class="footer">
-    <a href="#home" class="footer-logo">S <span>&</span> J</a>
-    <p>Made with love, for our favourite people.</p>
-    <a href="#home" class="back-top">BACK TO TOP ↑</a>
-  </footer>
+  <!-- External & Native Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
