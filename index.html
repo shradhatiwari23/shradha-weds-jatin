@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shradha weds Jatin | Royal Wedding Invitation</title>
   
+  <!-- Critical Asset Preloading for Instant Card Render -->
+  <link rel="preload" as="image" href="assets/rishikesh-ghats-painting.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/right-flap-west-bengal.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/left-flap-bihar-madhubani.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/mauli-bow-center.png">
+  <link rel="preload" as="image" href="assets/mauli-tassels.png">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +26,8 @@
 <body>
 
   <!-- Audio Background Player & Toggle -->
-  <audio id="weddingAudio" src="assets/wedding-ambient.mp3" preload="auto" loop></audio>
-  <button id="audioToggle" class="audio-control-btn" aria-label="Toggle Sangeet Music">
+  <audio id="weddingAudio" src="assets/wedding-ambient.mp3" preload="none" loop></audio>
+  <button id="audioToggle" class="audio-control-btn" aria-label="Toggle Wedding Music">
     <i class="fa-solid fa-volume-xmark" id="audioIcon"></i>
     <span class="audio-label">Mangal Dhwani</span>
   </button>
@@ -34,7 +41,7 @@
 
         <!-- LAYER 2: INSIDE REVEALED CARD -->
         <div class="card-inner-layer" id="cardInner">
-          <img src="assets/rishikesh-ghats-painting.png" alt="Holy Ganga Ghats at Twilight" class="ghats-bg-artwork">
+          <img src="assets/rishikesh-ghats-painting.png" alt="Rishikesh Ghats" class="ghats-bg-artwork" fetchpriority="high">
           <div class="ghats-overlay-gradient"></div>
           
           <div class="reveal-content-container">
@@ -49,34 +56,36 @@
             <p class="wedding-date-tagline">26th January 2027 • Rishikesh, Uttarakhand</p>
             
             <a href="#mangalacharan" class="explore-details-btn">
-              <span>View Wedding Itinerary</span>
+              <span>View Wedding Details</span>
               <i class="fa-solid fa-angle-down"></i>
             </a>
           </div>
         </div>
 
-        <!-- LAYER 3: 3D GATEFOLD FLAPS -->
-        <!-- Left Flap: Bihar & Madhubani Side -->
+        <!-- LAYER 3: 3D GATEFOLD FLAPS (SWAPPED: WB ON LEFT, BIHAR ON RIGHT) -->
+        <!-- Left Flap: West Bengal Side -->
         <div class="gatefold-flap left-flap" id="leftFlap">
-          <img src="assets/left-flap-bihar-madhubani.png" alt="Bihar Madhubani Artwork" class="flap-artwork-img">
+          <img src="assets/right-flap-west-bengal.png" alt="West Bengal Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
 
-        <!-- Right Flap: West Bengal Side -->
+        <!-- Right Flap: Bihar & Madhubani Side -->
         <div class="gatefold-flap right-flap" id="rightFlap">
-          <img src="assets/right-flap-west-bengal.png" alt="West Bengal Alpona Artwork" class="flap-artwork-img">
+          <img src="assets/left-flap-bihar-madhubani.png" alt="Bihar Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
 
         <!-- LAYER 4: MAULI THREAD FASTENER & INTERACTIVE TRIGGER -->
         <div class="fastener-assembly" id="fastenerAssembly">
           <div class="thread-horizontal-wrap">
-            <img src="assets/thread-band-left.png" alt="Mauli Cord Left" class="thread-strand left-strand" id="leftStrand">
-            <img src="assets/thread-band-right.png" alt="Mauli Cord Right" class="thread-strand right-strand" id="rightStrand">
+            <img src="assets/thread-band-left.png" alt="Mauli Left" class="thread-strand left-strand" id="leftStrand">
+            <img src="assets/thread-band-right.png" alt="Mauli Right" class="thread-strand right-strand" id="rightStrand">
           </div>
 
           <div class="center-knot-wrapper" id="centerKnotWrapper">
             <img src="assets/touch-indicator-pulse.png" alt="Tap to Open" class="touch-pulse-indicator" id="pulseIndicator">
-            <img src="assets/mauli-bow-center.png" alt="Sacred Mauli Bow Knot" class="mauli-bow-img" id="mauliBow">
+            <!-- Tassels placed underneath -->
             <img src="assets/mauli-tassels.png" alt="Mauli Tassels" class="mauli-tassels-img" id="mauliTassels">
+            <!-- Bow & Seal placed directly on top in the middle -->
+            <img src="assets/mauli-bow-center.png" alt="Mauli Knot" class="mauli-bow-img" id="mauliBow">
           </div>
         </div>
 
@@ -85,7 +94,7 @@
   </header>
 
   <!-- ============================================== -->
-  <!-- MAIN WEDDING INVITATION WEBSITE CONTENT        -->
+  <!-- MAIN WEBSITE CONTENT                           -->
   <!-- ============================================== -->
   <main class="wedding-site-body" id="siteBody">
 
@@ -117,14 +126,15 @@
       </div>
 
       <div class="lineage-dual-grid">
-        <!-- Groom Card -->
-        <div class="family-card groom-card">
-          <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
-          <h3 class="member-name">Chiranjeevi Jatin Prakash</h3>
-          <p class="kinship-relation">Suputra of</p>
-          <p class="parent-names">Mrs. Usha Kumari & Mr. Vinod Kumar</p>
+        <!-- Bride Card -->
+        <div class="family-card bride-card">
+          <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
+          <h3 class="member-name">Ayushmati Shradha Tiwari</h3>
+          <p class="kinship-relation">Suputri of</p>
+          <p class="parent-names">Mrs. Geeta Tiwari & Mr. Arvind Tiwari</p>
+          <p class="grandparent-names">Pautri of Mrs. Krishna Devi Tiwari & Late Tarak Nath Tiwari</p>
           <div class="hometown-pill">
-            <i class="fa-solid fa-location-dot"></i> Muzaffarpur, Bihar
+            <i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal
           </div>
         </div>
 
@@ -135,15 +145,14 @@
           </div>
         </div>
 
-        <!-- Bride Card -->
-        <div class="family-card bride-card">
-          <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
-          <h3 class="member-name">Ayushmati Shradha Tiwari</h3>
-          <p class="kinship-relation">Suputri of</p>
-          <p class="parent-names">Mrs. Geeta Tiwari & Mr. Arvind Tiwari</p>
-          <p class="grandparent-names">Pautri of Mrs. Krishna Devi Tiwari & Late Tarak Nath Tiwari</p>
+        <!-- Groom Card -->
+        <div class="family-card groom-card">
+          <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
+          <h3 class="member-name">Chiranjeevi Jatin Prakash</h3>
+          <p class="kinship-relation">Suputra of</p>
+          <p class="parent-names">Mrs. Usha Kumari & Mr. Vinod Kumar</p>
           <div class="hometown-pill">
-            <i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal
+            <i class="fa-solid fa-location-dot"></i> Muzaffarpur, Bihar
           </div>
         </div>
       </div>
@@ -187,7 +196,6 @@
       </div>
 
       <div class="itinerary-cards-grid">
-        <!-- Haldi -->
         <article class="ceremony-card haldi-card">
           <div class="ceremony-badge">Day 1 • Afternoon</div>
           <h3 class="ceremony-title">Haldi Ceremony</h3>
@@ -201,7 +209,6 @@
           </button>
         </article>
 
-        <!-- Sangeet -->
         <article class="ceremony-card sangeet-card">
           <div class="ceremony-badge">Day 1 • Evening</div>
           <h3 class="ceremony-title">Sangeet & Cocktail</h3>
@@ -215,7 +222,6 @@
           </button>
         </article>
 
-        <!-- Shubh Vivah -->
         <article class="ceremony-card wedding-card featured-wedding">
           <div class="ceremony-badge gold-badge">Day 2 • Auspicious Muhurat</div>
           <h3 class="ceremony-title">Shubh Vivah (Wedding)</h3>
@@ -284,25 +290,25 @@
         <div class="travel-box">
           <div class="travel-icon"><i class="fa-solid fa-plane-departure"></i></div>
           <h4>By Air</h4>
-          <p>Fly into <strong>Jolly Grant Airport, Dehradun (DED)</strong> (approx. 40 km from the venue). Pre-booked shuttles & taxis are readily available to Mohan Chatti.</p>
+          <p>Fly into <strong>Jolly Grant Airport, Dehradun (DED)</strong> (approx. 40 km from the venue). Shuttles & taxis are readily available.</p>
         </div>
 
         <div class="travel-box">
           <div class="travel-icon"><i class="fa-solid fa-train"></i></div>
           <h4>By Train</h4>
-          <p>Arrive at <strong>Haridwar Junction (HW)</strong> or <strong>Yog Nagari Rishikesh (YNRK)</strong>. The resort is an easy scenic 1-hour mountain drive from the station.</p>
+          <p>Arrive at <strong>Haridwar Junction (HW)</strong> or <strong>Yog Nagari Rishikesh (YNRK)</strong>. The resort is a 1-hour scenic drive away.</p>
         </div>
 
         <div class="travel-box">
           <div class="travel-icon"><i class="fa-solid fa-car"></i></div>
           <h4>By Road</h4>
-          <p>An approximate 5 to 6-hour smooth journey from Delhi-NCR via the Delhi-Meerut Expressway and NH 334 through Meerut, Muzaffarnagar & Haridwar.</p>
+          <p>Approx. 5 to 6-hour smooth journey from Delhi-NCR via Delhi-Meerut Expressway and NH 334 through Meerut, Muzaffarnagar & Haridwar.</p>
         </div>
       </div>
 
       <div class="weather-notice-banner">
         <i class="fa-solid fa-temperature-low"></i>
-        <span><strong>Winter Note:</strong> Rishikesh experiences pleasant sunny afternoons (~20°C) and brisk, chilly evenings (~7°C) in late January. Please carry warm shawls, jackets, and formal winter layers.</span>
+        <span><strong>Winter Note:</strong> Rishikesh experiences pleasant sunny afternoons (~20°C) and brisk, chilly evenings (~7°C) in late January. Please carry warm shawls and formal winter layers.</span>
       </div>
     </section>
 
@@ -395,8 +401,6 @@
 
   </main>
 
-  <!-- External & Native Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
