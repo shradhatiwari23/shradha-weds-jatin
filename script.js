@@ -3,7 +3,6 @@
    ============================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const weddingCard = document.getElementById('weddingCard');
   const fastenerAssembly = document.getElementById('fastenerAssembly');
   const centerKnotWrapper = document.getElementById('centerKnotWrapper');
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Disassemble Mauli Thread & Bow
     fastenerAssembly.classList.add('disassembled');
 
-    // Swing Flaps Open after short untie delay (250ms)
+    // Swing Flaps Open after short untie delay (280ms)
     setTimeout(() => {
       weddingCard.classList.add('opened');
       initiateAudioPlayback();
@@ -48,12 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function initiateAudioPlayback() {
-    // Attempt HTML5 Audio element first
     weddingAudio.play().then(() => {
       isPlayingAudio = true;
       audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
     }).catch(() => {
-      // If no file present in Assets/sound/, start Web Audio API Drone
+      // Fallback Web Audio API Tanpura drone if audio asset is missing/blocked
       startVedicSynthesizer();
       isPlayingAudio = true;
       audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
   }
 
-  // Pure Web Audio Tanpura/Shehnai Drone Generator
   function startVedicSynthesizer() {
     if (audioContext) {
       audioContext.resume();
@@ -82,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     masterGain.gain.setValueAtTime(0.06, audioContext.currentTime);
     masterGain.connect(audioContext.destination);
 
-    // Auspicious frequencies in Indian Classical Music (Sa - Pa - Sa octave)
     const droneFreqs = [146.83, 220.00, 293.66, 440.00];
 
     droneFreqs.forEach((freq, idx) => {
