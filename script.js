@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isCardOpened = false;
 
-  // 1. GATEFOLD REVEAL INTERACTION (TAP TO UNTIE & OPEN)
+  // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN)
   if (centerKnotWrapper) {
     centerKnotWrapper.addEventListener('click', triggerOpeningSequence);
   }
@@ -24,10 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCardOpened) return;
     isCardOpened = true;
 
-    // Disassemble Mauli Thread & Bow
-    fastenerAssembly.classList.add('disassembled');
+    // Disassemble & Fade Royal Seal
+    if (fastenerAssembly) {
+      fastenerAssembly.classList.add('disassembled');
+    }
 
-    // Swing Flaps Open after short untie delay (280ms)
+    // Swing Flaps Open after short opening delay (280ms)
     setTimeout(() => {
       weddingCard.classList.add('opened');
       initiateAudioPlayback();
