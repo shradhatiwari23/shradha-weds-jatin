@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isCardOpened = false;
 
-  // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN)
+  // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN & UNLOCK SCROLL)
   if (centerKnotWrapper) {
     centerKnotWrapper.addEventListener('click', triggerOpeningSequence);
   }
@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerOpeningSequence() {
     if (isCardOpened) return;
     isCardOpened = true;
+
+    // Unlock page scroll immediately on click
+    document.documentElement.classList.add('scroll-enabled');
+    document.body.classList.add('scroll-enabled');
 
     // Disassemble & Fade Royal Seal
     if (fastenerAssembly) {
