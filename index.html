@@ -9,8 +9,7 @@
   <link rel="preload" as="image" href="assets/rishikesh-ghats-painting.png" fetchpriority="high">
   <link rel="preload" as="image" href="assets/right-flap-west-bengal.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/left-flap-bihar-madhubani.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/mauli-bow-center.png">
-  <link rel="preload" as="image" href="assets/mauli-tassels.png">
+  <link rel="preload" as="image" href="assets/royal-seal.png">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +61,7 @@
           </div>
         </div>
 
-        <!-- LAYER 3: 3D GATEFOLD FLAPS (SWAPPED: WB ON LEFT, BIHAR ON RIGHT) -->
+        <!-- LAYER 3: 3D GATEFOLD FLAPS (WB ON LEFT, BIHAR ON RIGHT) -->
         <!-- Left Flap: West Bengal Side -->
         <div class="gatefold-flap left-flap" id="leftFlap">
           <img src="assets/right-flap-west-bengal.png" alt="West Bengal Flap" class="flap-artwork-img" fetchpriority="high">
@@ -73,19 +72,13 @@
           <img src="assets/left-flap-bihar-madhubani.png" alt="Bihar Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
 
-        <!-- LAYER 4: MAULI THREAD FASTENER & INTERACTIVE TRIGGER -->
+        <!-- LAYER 4: CENTER WAX SEAL & TAP TO OPEN PROMPT -->
         <div class="fastener-assembly" id="fastenerAssembly">
-          <div class="thread-horizontal-wrap">
-            <img src="assets/thread-band-left.png" alt="Mauli Left" class="thread-strand left-strand" id="leftStrand">
-            <img src="assets/thread-band-right.png" alt="Mauli Right" class="thread-strand right-strand" id="rightStrand">
-          </div>
-
           <div class="center-knot-wrapper" id="centerKnotWrapper">
-            <img src="assets/touch-indicator-pulse.png" alt="Tap to Open" class="touch-pulse-indicator" id="pulseIndicator">
-            <!-- Tassels placed underneath -->
-            <img src="assets/mauli-tassels.png" alt="Mauli Tassels" class="mauli-tassels-img" id="mauliTassels">
-            <!-- Bow & Seal placed directly on top in the middle -->
-            <img src="assets/mauli-bow-center.png" alt="Mauli Knot" class="mauli-bow-img" id="mauliBow">
+            <div class="royal-seal">
+              <img src="assets/royal-seal.png" alt="Royal Wedding Seal" class="seal-emblem-img" id="royalSeal">
+            </div>
+            <span class="tap-to-open-text">Tap to open</span>
           </div>
         </div>
 
