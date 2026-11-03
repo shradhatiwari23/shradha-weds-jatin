@@ -38,6 +38,8 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden; /* Locked until opened */
 }
 
 body {
@@ -46,7 +48,16 @@ body {
   font-family: var(--font-serif-reading);
   font-size: 1.15rem;
   line-height: 1.7;
+  height: 100%;
   overflow-x: hidden;
+  overflow-y: hidden; /* Prevents scrolling before tap */
+}
+
+/* Unlocks scrolling when the card/seal is tapped */
+html.scroll-enabled,
+body.scroll-enabled {
+  height: auto;
+  overflow-y: auto;
 }
 
 /* Audio Control Button */
@@ -297,7 +308,7 @@ body {
   user-select: none;
 }
 
-/* Circular Seal Frame using touch-pulse-indicator naming */
+/* Circular Seal Frame */
 .touch-pulse-indicator {
   width: 96px;
   height: 96px;
