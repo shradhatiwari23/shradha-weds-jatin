@@ -1,5 +1,5 @@
 /* ==============================================================
-   INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TIMER & RSVP
+   INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TIMER, RSVP & GALLERY
    ============================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       initiateAudioPlayback();
     }, 180);
 
-    // Unlock page scroll without triggering layout repainting glitch
+    // Unlock page scroll smoothly without causing reflow/layout glitch
     setTimeout(() => {
       document.body.classList.add('scroll-enabled');
     }, 600);
@@ -45,33 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
   let audioContext = null;
   let isPlayingAudio = false;
 
-  audioToggleBtn.addEventListener('click', () => {
-    if (!isPlayingAudio) {
-      initiateAudioPlayback();
-    } else {
-      pauseAudioPlayback();
-    }
-  });
+  if (audioToggleBtn) {
+    audioToggleBtn.addEventListener('click', () => {
+      if (!isPlayingAudio) {
+        initiateAudioPlayback();
+      } else {
+        pauseAudioPlayback();
+      }
+    });
+  }
 
   function initiateAudioPlayback() {
+    if (!weddingAudio) return;
     weddingAudio.play().then(() => {
       isPlayingAudio = true;
-      audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
     }).catch(() => {
       // Fallback Web Audio API Tanpura drone if audio asset is missing/blocked
       startVedicSynthesizer();
       isPlayingAudio = true;
-      audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
     });
   }
 
   function pauseAudioPlayback() {
-    weddingAudio.pause();
+    if (weddingAudio) weddingAudio.pause();
     if (audioContext) {
       audioContext.suspend();
     }
     isPlayingAudio = false;
-    audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+    if (audioIcon) audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
   }
 
   function startVedicSynthesizer() {
@@ -109,11 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentTime = new Date().getTime();
     const distance = weddingMuhuratTime - currentTime;
 
+    const daysEl = document.getElementById('daysVal');
+    const hoursEl = document.getElementById('hoursVal');
+    const minutesEl = document.getElementById('minutesVal');
+    const secondsEl = document.getElementById('secondsVal');
+
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
     if (distance < 0) {
-      document.getElementById('daysVal').innerText = "00";
-      document.getElementById('hoursVal').innerText = "00";
-      document.getElementById('minutesVal').innerText = "00";
-      document.getElementById('secondsVal').innerText = "00";
+      daysEl.innerText = "00";
+      hoursEl.innerText = "00";
+      minutesEl.innerText = "00";
+      secondsEl.innerText = "00";
       return;
     }
 
@@ -122,28 +132,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('daysVal').innerText = days < 10 ? `0${days}` : days;
-    document.getElementById('hoursVal').innerText = hours < 10 ? `0${hours}` : hours;
-    document.getElementById('minutesVal').innerText = minutes < 10 ? `0${minutes}` : minutes;
-    document.getElementById('secondsVal').innerText = seconds < 10 ? `0${seconds}` : seconds;
+    daysEl.innerText = days < 10 ? `0${days}` : days;
+    hoursEl.innerText = hours < 10 ? `0${hours}` : hours;
+    minutesEl.innerText = minutes < 10 ? `0${minutes}` : minutes;
+    secondsEl.innerText = seconds < 10 ? `0${seconds}` : seconds;
   }
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // 4. LOCAL RSVP FORM HANDLER (STANDALONE)
+  // 4. RSVP FORM SUBMISSION HANDLER
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      rsvpSuccessMsg.style.display = 'flex';
+      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'flex';
       rsvpForm.reset();
       setTimeout(() => {
-        rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
+        if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     });
   }
 
-  // 5. DOWNLOAD VCF CONTACT CARD (.vcf)
+  // 5. DOWNLOAD VCF CONTACT CARD (.vcf)[cite: 2]
   if (contactCardBtn) {
     contactCardBtn.addEventListener('click', () => {
       const vcfContent = [
@@ -156,24 +166,102 @@ document.addEventListener('DOMContentLoaded', () => {
         "ADR;TYPE=WORK:;;DLS Divine River Resort and Spa, Mohan Chatti;Rishikesh;Uttarakhand;249304;India",
         "NOTE:Shradha weds Jatin (25-26 Jan 2027) Wedding Desk",
         "END:VCARD"
-      ].join("\r\n");
+      ].join("\r\n"); //[cite: 2]
 
-      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const tempLink = document.createElement("a");
-      tempLink.href = url;
-      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
+      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" }); //[cite: 2]
+      const url = URL.createObjectURL(blob); //[cite: 2]
+      const tempLink = document.createElement("a"); //[cite: 2]
+      tempLink.href = url; //[cite: 2]
+      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf"); //[cite: 2]
+      document.body.appendChild(tempLink); //[cite: 2]
+      tempLink.click(); //[cite: 2]
+      document.body.removeChild(tempLink); //[cite: 2]
     });
+  }
+
+  // 6. POLAROID MOMENTS GALLERY CAROUSEL CONTROLLER
+  const polaroidTrack = document.getElementById('polaroidTrack');
+  const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+  const galleryNextBtn = document.getElementById('galleryNextBtn');
+  const galleryCounter = document.getElementById('galleryCounter');
+  const polaroidCards = document.querySelectorAll('.polaroid-card');
+
+  if (polaroidTrack && galleryPrevBtn && galleryNextBtn && polaroidCards.length > 0) {
+    let activeIndex = 0;
+    const totalPhotos = polaroidCards.length;
+
+    function updateCounterDisplay(idx) {
+      const formattedCurrent = String(idx + 1).padStart(2, '0');
+      const formattedTotal = String(totalPhotos).padStart(2, '0');
+      if (galleryCounter) {
+        galleryCounter.textContent = `${formattedCurrent} / ${formattedTotal}`;
+      }
+    }
+
+    function scrollToIndex(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalPhotos) idx = totalPhotos - 1;
+      activeIndex = idx;
+
+      const card = polaroidCards[activeIndex];
+      const scrollLeftPos = card.offsetLeft - (polaroidTrack.clientWidth / 2) + (card.clientWidth / 2);
+
+      polaroidTrack.scrollTo({
+        left: scrollLeftPos,
+        behavior: 'smooth'
+      });
+
+      updateCounterDisplay(activeIndex);
+    }
+
+    galleryNextBtn.addEventListener('click', () => {
+      if (activeIndex < totalPhotos - 1) {
+        scrollToIndex(activeIndex + 1);
+      } else {
+        scrollToIndex(0); // Loops back to first photo
+      }
+    });
+
+    galleryPrevBtn.addEventListener('click', () => {
+      if (activeIndex > 0) {
+        scrollToIndex(activeIndex - 1);
+      } else {
+        scrollToIndex(totalPhotos - 1); // Loops to last photo
+      }
+    });
+
+    // Update active index indicator on manual touch swipe/drag
+    let scrollTimeout;
+    polaroidTrack.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const trackCenter = polaroidTrack.scrollLeft + (polaroidTrack.clientWidth / 2);
+        let closestIndex = 0;
+        let minDiff = Infinity;
+
+        polaroidCards.forEach((card, i) => {
+          const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+          const diff = Math.abs(cardCenter - trackCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = i;
+          }
+        });
+
+        activeIndex = closestIndex;
+        updateCounterDisplay(activeIndex);
+      }, 100);
+    });
+
+    // Initial counter setup
+    updateCounterDisplay(0);
   }
 });
 
-// 6. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT
+// 7. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT[cite: 2]
 function downloadIcs(title, startTimeIso, endTimeIso, description) {
   const formatDateToIcs = (isoStr) => {
-    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, "");
+    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, ""); //[cite: 2]
   };
 
   const icsContent = [
@@ -190,14 +278,14 @@ function downloadIcs(title, startTimeIso, endTimeIso, description) {
     "STATUS:CONFIRMED",
     "END:VEVENT",
     "END:VCALENDAR"
-  ].join("\r\n");
+  ].join("\r\n"); //[cite: 2]
 
-  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const tempLink = document.createElement("a");
-  tempLink.href = url;
-  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`);
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  document.body.removeChild(tempLink);
+  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" }); //[cite: 2]
+  const url = URL.createObjectURL(blob); //[cite: 2]
+  const tempLink = document.createElement("a"); //[cite: 2]
+  tempLink.href = url; //[cite: 2]
+  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`); //[cite: 2]
+  document.body.appendChild(tempLink); //[cite: 2]
+  tempLink.click(); //[cite: 2]
+  document.body.removeChild(tempLink); //[cite: 2]
 }
