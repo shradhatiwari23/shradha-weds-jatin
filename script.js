@@ -2,12 +2,6 @@
    INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TIMER, RSVP & GALLERY
    ============================================================== */
 
-/* --------------------------------------------------------------
-   CONFIG: paste your Google Apps Script Web App URL here.
-   (See SETUP-GOOGLE-SHEET.md — it ends with "/exec")
-   -------------------------------------------------------------- */
-const RSVP_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
-
 document.addEventListener('DOMContentLoaded', () => {
   const weddingCard = document.getElementById('weddingCard');
   const fastenerAssembly = document.getElementById('fastenerAssembly');
@@ -17,43 +11,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const weddingAudio = document.getElementById('weddingAudio');
   const rsvpForm = document.getElementById('rsvpForm');
   const rsvpSuccessMsg = document.getElementById('rsvpSuccessMsg');
-  const rsvpErrorMsg = document.getElementById('rsvpErrorMsg');
   const contactCardBtn = document.getElementById('downloadContactCard');
 
   let isCardOpened = false;
 
   // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN & UNLOCK SCROLL)
   if (centerKnotWrapper) {
-    centerKnotWrapper.setAttribute('role', 'button');
-    centerKnotWrapper.setAttribute('tabindex', '0');
     centerKnotWrapper.addEventListener('click', triggerOpeningSequence);
-    centerKnotWrapper.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        triggerOpeningSequence();
-      }
-    });
   }
 
   function triggerOpeningSequence() {
     if (isCardOpened) return;
     isCardOpened = true;
 
-    // Start audio INSIDE the tap handler (browsers only allow it during a user gesture)
-    initiateAudioPlayback();
+    // Disassemble & fade royal seal prompt
+    if (fastenerAssembly) {
+      fastenerAssembly.classList.add('disassembled');
+    }
 
-    // Fade out the seal prompt
-    if (fastenerAssembly) fastenerAssembly.classList.add('disassembled');
-
-    // Open the flaps on the next frame so the transition always plays
+    // Trigger flap opening on next animation frame
     requestAnimationFrame(() => {
       weddingCard.classList.add('opened');
+      initiateAudioPlayback();
     });
 
-    // After the 1.2s rotation: hide the flaps for good, then unlock scrolling.
-    // Doing these two things AFTER the animation is what removes the white flash.
+    // Wait until the 1.2s 3D rotation completes before allowing page scroll to prevent white flash
     setTimeout(() => {
-      weddingCard.classList.add('flaps-gone');
       document.body.classList.add('scroll-enabled');
     }, 1300);
   }
@@ -72,42 +55,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function setAudioIcon(playing) {
-    if (!audioIcon) return;
-    audioIcon.classList.remove(playing ? 'fa-volume-xmark' : 'fa-volume-high');
-    audioIcon.classList.add(playing ? 'fa-volume-high' : 'fa-volume-xmark');
-  }
-
   function initiateAudioPlayback() {
     if (!weddingAudio) return;
-    isPlayingAudio = true;
-    setAudioIcon(true);
-
-    let playPromise;
-    try {
-      playPromise = weddingAudio.play();
-    } catch (err) {
-      playPromise = Promise.reject(err);
-    }
-
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
-        // Audio file missing/blocked -> Web Audio tanpura drone fallback
-        try {
-          startVedicSynthesizer();
-        } catch (e) {
-          isPlayingAudio = false;
-          setAudioIcon(false);
-        }
-      });
-    }
+    weddingAudio.play().then(() => {
+      isPlayingAudio = true;
+      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+    }).catch(() => {
+      // Fallback Web Audio API Tanpura drone if audio asset is missing/blocked
+      startVedicSynthesizer();
+      isPlayingAudio = true;
+      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+    });
   }
 
   function pauseAudioPlayback() {
     if (weddingAudio) weddingAudio.pause();
-    if (audioContext) audioContext.suspend();
+    if (audioContext) {
+      audioContext.suspend();
+    }
     isPlayingAudio = false;
-    setAudioIcon(false);
+    if (audioIcon) audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
   }
 
   function startVedicSynthesizer() {
@@ -116,9 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
     audioContext = new AudioCtx();
-    audioContext.resume();
 
     const masterGain = audioContext.createGain();
     masterGain.gain.setValueAtTime(0.06, audioContext.currentTime);
@@ -176,69 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // 4. RSVP FORM -> GOOGLE SHEET
+  // 4. RSVP FORM SUBMISSION HANDLER
   if (rsvpForm) {
-    const submitBtn = rsvpForm.querySelector('.rsvp-submit-btn');
-    const submitLabel = submitBtn ? submitBtn.querySelector('span') : null;
-    const originalLabel = submitLabel ? submitLabel.textContent : '';
-
-    function showError(message) {
-      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'none';
-      if (rsvpErrorMsg) {
-        const text = rsvpErrorMsg.querySelector('span');
-        if (text && message) text.textContent = message;
-        rsvpErrorMsg.style.display = 'flex';
-      }
-    }
-
-    rsvpForm.addEventListener('submit', async (e) => {
+    rsvpForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'none';
-      if (rsvpErrorMsg) rsvpErrorMsg.style.display = 'none';
-
-      if (!RSVP_SCRIPT_URL || RSVP_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
-        console.warn('RSVP_SCRIPT_URL is not set in script.js');
-        showError('RSVP is not connected yet. Please contact the family directly.');
-        return;
-      }
-
-      const data = new URLSearchParams();
-      data.append('name', document.getElementById('guestName').value.trim());
-      data.append('phone', document.getElementById('guestPhone').value.trim());
-      data.append('attendance', document.getElementById('guestAttendance').value);
-      data.append('guests', document.getElementById('guestCount').value);
-      data.append('wishes', document.getElementById('guestWishes').value.trim());
-      const honeypot = document.getElementById('guestWebsite');
-      data.append('website', honeypot ? honeypot.value : '');
-
-      if (submitBtn) submitBtn.disabled = true;
-      if (submitLabel) submitLabel.textContent = 'Sending...';
-
-      try {
-        // no-cors: Apps Script doesn't send CORS headers; the request still
-        // reaches the sheet, the response is just opaque to the browser.
-        await fetch(RSVP_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: data
-        });
-
-        rsvpForm.reset();
-        if (rsvpSuccessMsg) {
-          rsvpSuccessMsg.style.display = 'flex';
-          setTimeout(() => rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-        }
-      } catch (err) {
-        console.error('RSVP submit failed:', err);
-        showError('Could not send your RSVP. Please check your connection and try again.');
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-        if (submitLabel) submitLabel.textContent = originalLabel;
-      }
+      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'flex';
+      rsvpForm.reset();
+      setTimeout(() => {
+        if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     });
   }
 
-  // 5. DOWNLOAD VCF CONTACT CARD (.vcf)
+  // 5. DOWNLOAD VCF CONTACT CARD (.vcf)[cite: 2]
   if (contactCardBtn) {
     contactCardBtn.addEventListener('click', () => {
       const vcfContent = [
@@ -251,17 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "ADR;TYPE=WORK:;;DLS Divine River Resort and Spa, Mohan Chatti;Rishikesh;Uttarakhand;249304;India",
         "NOTE:Shradha weds Jatin (25-26 Jan 2027) Wedding Desk",
         "END:VCARD"
-      ].join("\r\n");
+      ].join("\r\n");[cite: 2]
 
-      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const tempLink = document.createElement("a");
-      tempLink.href = url;
-      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-      URL.revokeObjectURL(url);
+      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });[cite: 2]
+      const url = URL.createObjectURL(blob);[cite: 2]
+      const tempLink = document.createElement("a");[cite: 2]
+      tempLink.href = url;[cite: 2]
+      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");[cite: 2]
+      document.body.appendChild(tempLink);[cite: 2]
+      tempLink.click();[cite: 2]
+      document.body.removeChild(tempLink);[cite: 2]
     });
   }
 
@@ -344,12 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// 7. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT
+// 7. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT[cite: 2]
 function downloadIcs(title, startTimeIso, endTimeIso, description) {
   const formatDateToIcs = (isoStr) => {
-    // Event times are IST; add the offset if the string has no timezone
-    const withZone = /(Z|[+-]\d\d:\d\d)$/.test(isoStr) ? isoStr : isoStr + '+05:30';
-    return new Date(withZone).toISOString().replace(/-|:|\.\d\d\d/g, "");
+    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, "");[cite: 2]
   };
 
   const icsContent = [
@@ -366,15 +278,14 @@ function downloadIcs(title, startTimeIso, endTimeIso, description) {
     "STATUS:CONFIRMED",
     "END:VEVENT",
     "END:VCALENDAR"
-  ].join("\r\n");
+  ].join("\r\n");[cite: 2]
 
-  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const tempLink = document.createElement("a");
-  tempLink.href = url;
-  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`);
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  document.body.removeChild(tempLink);
-  URL.revokeObjectURL(url);
+  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });[cite: 2]
+  const url = URL.createObjectURL(blob);[cite: 2]
+  const tempLink = document.createElement("a");[cite: 2]
+  tempLink.href = url;[cite: 2]
+  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`);[cite: 2]
+  document.body.appendChild(tempLink);[cite: 2]
+  tempLink.click();[cite: 2]
+  document.body.removeChild(tempLink);[cite: 2]
 }
