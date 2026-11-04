@@ -434,6 +434,12 @@
           <textarea id="guestWishes" rows="3" placeholder="Write your auspicious blessings..."></textarea>
         </div>
 
+        <!-- Honeypot: hidden from real guests, bots fill it in -->
+        <div style="position:absolute;left:-9999px;" aria-hidden="true">
+          <label for="guestWebsite">Leave this empty</label>
+          <input type="text" id="guestWebsite" tabindex="-1" autocomplete="off">
+        </div>
+
         <button type="submit" class="rsvp-submit-btn">
           <span>Send Your Confirmation</span>
           <i class="fa-solid fa-paper-plane"></i>
@@ -442,6 +448,11 @@
         <div id="rsvpSuccessMsg" class="rsvp-success-banner" style="display: none;">
           <i class="fa-solid fa-circle-check"></i>
           <span>Thank you! Your RSVP has been received with love and folded hands.</span>
+        </div>
+
+        <div id="rsvpErrorMsg" class="rsvp-error-banner" style="display: none;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Something went wrong. Please try again.</span>
         </div>
       </form>
     </section>
