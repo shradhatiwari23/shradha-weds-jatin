@@ -1269,21 +1269,19 @@ body.scroll-enabled {
    RESPONSIVE MEDIA QUERIES
    ============================================================== */
 @media (max-width: 900px) {
-  .itinerary-cards-grid,
-  .travel-modes-grid {
+  .itinerary-row {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 40px 10px;
   }
   
-  .venue-card-wrapper {
-    grid-template-columns: 1fr;
-  }
+  /* Force vertical stacking order on mobile: Icon > Date > Details */
+  .itinerary-row:nth-child(n) .col-icon { order: 1; }
+  .itinerary-row:nth-child(n) .col-date { order: 2; margin-bottom: 10px; }
+  .itinerary-row:nth-child(n) .col-details { order: 3; }
   
-  .lineage-dual-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .lineage-center-emblem {
-    margin: 10px 0;
+  .event-illustration {
+    max-width: 140px;
   }
 }
 
