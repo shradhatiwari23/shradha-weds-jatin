@@ -8,7 +8,7 @@
   <!-- Critical Asset Preloading for Instant Card Render -->
   <link rel="preload" as="image" href="assets/rishikesh-ghats-painting.png" fetchpriority="high">
   <link rel="preload" as="image" href="assets/right-flap.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/left-flap.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/left-flap-bihar.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/royal-seal.png">
 
   <!-- Google Fonts -->
@@ -151,66 +151,6 @@
       </div>
     </section>
 
-    <!-- Section: Couple Gallery / Moments Carousel -->
-    <section class="section-container moments-section" id="moments">
-      <div class="moments-header-wrap">
-        <span class="moments-eyebrow">THE LITTLE MOMENTS THAT BROUGHT US HERE</span>
-        <h2 class="moments-title">A love story,<br><span class="moments-subtitle">one frame at a time.</span></h2>
-      </div>
-
-      <div class="polaroid-slider-wrapper">
-        <div class="polaroid-carousel-track" id="polaroidTrack">
-          <!-- Photo 1 -->
-          <div class="polaroid-card tilt-left active" data-index="1">
-            <div class="polaroid-frame">
-              <img src="assets/couple-image1.jpeg" alt="Shradha and Jatin Moment 1" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Photo 2 -->
-          <div class="polaroid-card tilt-straight" data-index="2">
-            <div class="polaroid-frame">
-              <img src="assets/couple-image2.jpg" alt="Shradha and Jatin Moment 2" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Photo 3 -->
-          <div class="polaroid-card tilt-right" data-index="3">
-            <div class="polaroid-frame">
-              <img src="assets/couple-image3.jpg" alt="Shradha and Jatin Moment 3" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Photo 4 -->
-          <div class="polaroid-card tilt-left" data-index="4">
-            <div class="polaroid-frame">
-              <img src="assets/couple-image4.jpg" alt="Shradha and Jatin Moment 4" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Photo 5 -->
-          <div class="polaroid-card tilt-right" data-index="5">
-            <div class="polaroid-frame">
-              <img src="assets/couple-image5.jpg" alt="Shradha and Jatin Moment 5" loading="lazy">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls & Counter Pill -->
-      <div class="polaroid-nav-dock">
-        <button class="nav-circle-btn" id="galleryPrevBtn" aria-label="Previous Photo">
-          <i class="fa-solid fa-arrow-left"></i>
-        </button>
-        <span class="gallery-counter-pill" id="galleryCounter">01 / 05</span>
-        <button class="nav-circle-btn" id="galleryNextBtn" aria-label="Next Photo">
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-
-      <p class="moments-caption-note">Cherished memories captured across the years</p>
-    </section>
-    
     <!-- Section 3: Live Countdown -->
     <section class="section-container countdown-section" id="countdown">
       <div class="section-heading-wrap">
@@ -264,7 +204,7 @@
 
         <article class="ceremony-card sangeet-card">
           <div class="ceremony-badge">Day 1 • Evening</div>
-          <h3 class="ceremony-title">Sangeet & Tilak</h3>
+          <h3 class="ceremony-title">Sangeet & Cocktail</h3>
           <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 7:00 PM</p>
           <p class="ceremony-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
           <div class="ceremony-attire">
@@ -434,12 +374,6 @@
           <textarea id="guestWishes" rows="3" placeholder="Write your auspicious blessings..."></textarea>
         </div>
 
-        <!-- Honeypot: hidden from real guests, bots fill it in -->
-        <div style="position:absolute;left:-9999px;" aria-hidden="true">
-          <label for="guestWebsite">Leave this empty</label>
-          <input type="text" id="guestWebsite" tabindex="-1" autocomplete="off">
-        </div>
-
         <button type="submit" class="rsvp-submit-btn">
           <span>Send Your Confirmation</span>
           <i class="fa-solid fa-paper-plane"></i>
@@ -448,11 +382,6 @@
         <div id="rsvpSuccessMsg" class="rsvp-success-banner" style="display: none;">
           <i class="fa-solid fa-circle-check"></i>
           <span>Thank you! Your RSVP has been received with love and folded hands.</span>
-        </div>
-
-        <div id="rsvpErrorMsg" class="rsvp-error-banner" style="display: none;">
-          <i class="fa-solid fa-circle-exclamation"></i>
-          <span>Something went wrong. Please try again.</span>
         </div>
       </form>
     </section>
