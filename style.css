@@ -1295,29 +1295,21 @@ body.scroll-enabled {
    RESPONSIVE MEDIA QUERIES
    ============================================================== */
 @media (max-width: 900px) {
-  /* Scoped strictly to the Itinerary / Wedding Function section */
-  #itinerary .itinerary-row {
+  .itinerary-cards-grid,
+  .travel-modes-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 36px 10px;
   }
   
-  /* Stacks elements vertically on mobile inside this section only */
-  #itinerary .itinerary-row:nth-child(n) .col-icon {
-    order: 1;
-  }
-
-  #itinerary .itinerary-row:nth-child(n) .col-date {
-    order: 2;
-    margin-bottom: 8px;
-  }
-
-  #itinerary .itinerary-row:nth-child(n) .col-details {
-    order: 3;
+  .venue-card-wrapper {
+    grid-template-columns: 1fr;
   }
   
-  #itinerary .event-illustration {
-    max-width: 140px;
+  .lineage-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lineage-center-emblem {
+    margin: 10px 0;
   }
 }
 
