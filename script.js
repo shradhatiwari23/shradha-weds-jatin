@@ -1,192 +1,11 @@
-/* ==============================================================
-   INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TIMER, RSVP & GALLERY
-   ============================================================== */
-
-document.addEventListener('DOMContentLoaded', () => {
-  const weddingCard = document.getElementById('weddingCard');
-  const fastenerAssembly = document.getElementById('fastenerAssembly');
-  const centerKnotWrapper = document.getElementById('centerKnotWrapper');
-  const audioToggleBtn = document.getElementById('audioToggle');
-  const audioIcon = document.getElementById('audioIcon');
-  const weddingAudio = document.getElementById('weddingAudio');
-  const rsvpForm = document.getElementById('rsvpForm');
-  const rsvpSuccessMsg = document.getElementById('rsvpSuccessMsg');
-  const contactCardBtn = document.getElementById('downloadContactCard');
-
-  let isCardOpened = false;
-
-  // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN & UNLOCK SCROLL)
-  if (centerKnotWrapper) {
-    centerKnotWrapper.addEventListener('click', triggerOpeningSequence);
-  }
-
-  function triggerOpeningSequence() {
-    if (isCardOpened) return;
-    isCardOpened = true;
-
-    // Disassemble & fade royal seal prompt
-    if (fastenerAssembly) {
-      fastenerAssembly.classList.add('disassembled');
-    }
-
-    // Trigger flap opening on next animation frame
-    requestAnimationFrame(() => {
-      weddingCard.classList.add('opened');
-      initiateAudioPlayback();
-    });
-
-    // Wait until the 1.2s 3D rotation completes before allowing page scroll to prevent white flash
-    setTimeout(() => {
-      document.body.classList.add('scroll-enabled');
-    }, 1300);
-  }
-
-  // 2. AUDIO SYNTHESIS / FALLBACK ENGINE
-  let audioContext = null;
-  let isPlayingAudio = false;
-
-  if (audioToggleBtn) {
-    audioToggleBtn.addEventListener('click', () => {
-      if (!isPlayingAudio) {
-        initiateAudioPlayback();
-      } else {
-        pauseAudioPlayback();
-      }
-    });
-  }
-
-  function initiateAudioPlayback() {
-    if (!weddingAudio) return;
-    weddingAudio.play().then(() => {
-      isPlayingAudio = true;
-      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
-    }).catch(() => {
-      // Fallback Web Audio API Tanpura drone if audio asset is missing/blocked
-      startVedicSynthesizer();
-      isPlayingAudio = true;
-      if (audioIcon) audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
-    });
-  }
-
-  function pauseAudioPlayback() {
-    if (weddingAudio) weddingAudio.pause();
-    if (audioContext) {
-      audioContext.suspend();
-    }
-    isPlayingAudio = false;
-    if (audioIcon) audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
-  }
-
-  function startVedicSynthesizer() {
-    if (audioContext) {
-      audioContext.resume();
-      return;
-    }
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    audioContext = new AudioCtx();
-
-    const masterGain = audioContext.createGain();
-    masterGain.gain.setValueAtTime(0.06, audioContext.currentTime);
-    masterGain.connect(audioContext.destination);
-
-    const droneFreqs = [146.83, 220.00, 293.66, 440.00];
-
-    droneFreqs.forEach((freq, idx) => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-
-      osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-      osc.frequency.setValueAtTime(freq, audioContext.currentTime);
-
-      gain.gain.setValueAtTime(0.2, audioContext.currentTime);
-      osc.connect(gain);
-      gain.connect(masterGain);
-      osc.start();
-    });
-  }
-
-  // 3. LIVE MUHURAT COUNTDOWN TIMER (26th January 2027, 10:00 AM IST)
-  const weddingMuhuratTime = new Date('2027-01-26T10:00:00+05:30').getTime();
-
-  function updateCountdown() {
-    const currentTime = new Date().getTime();
-    const distance = weddingMuhuratTime - currentTime;
-
-    const daysEl = document.getElementById('daysVal');
-    const hoursEl = document.getElementById('hoursVal');
-    const minutesEl = document.getElementById('minutesVal');
-    const secondsEl = document.getElementById('secondsVal');
-
-    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-
-    if (distance < 0) {
-      daysEl.innerText = "00";
-      hoursEl.innerText = "00";
-      minutesEl.innerText = "00";
-      secondsEl.innerText = "00";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    daysEl.innerText = days < 10 ? `0${days}` : days;
-    hoursEl.innerText = hours < 10 ? `0${hours}` : hours;
-    minutesEl.innerText = minutes < 10 ? `0${minutes}` : minutes;
-    secondsEl.innerText = seconds < 10 ? `0${seconds}` : seconds;
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  // 4. RSVP FORM SUBMISSION HANDLER
-  if (rsvpForm) {
-    rsvpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'flex';
-      rsvpForm.reset();
-      setTimeout(() => {
-        if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    });
-  }
-
-  // 5. DOWNLOAD VCF CONTACT CARD (.vcf)[cite: 2]
-  if (contactCardBtn) {
-    contactCardBtn.addEventListener('click', () => {
-      const vcfContent = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
-        "N:Prakash;Jatin;;;",
-        "FN:Shradha & Jatin Wedding Helpdesk",
-        "ORG:Tiwari & Prakash Family",
-        "TITLE:Wedding Host / Logistics",
-        "ADR;TYPE=WORK:;;DLS Divine River Resort and Spa, Mohan Chatti;Rishikesh;Uttarakhand;249304;India",
-        "NOTE:Shradha weds Jatin (25-26 Jan 2027) Wedding Desk",
-        "END:VCARD"
-      ].join("\r\n");[cite: 2]
-
-      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });[cite: 2]
-      const url = URL.createObjectURL(blob);[cite: 2]
-      const tempLink = document.createElement("a");[cite: 2]
-      tempLink.href = url;[cite: 2]
-      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");[cite: 2]
-      document.body.appendChild(tempLink);[cite: 2]
-      tempLink.click();[cite: 2]
-      document.body.removeChild(tempLink);[cite: 2]
-    });
-  }
-
-  // 6. POLAROID MOMENTS GALLERY CAROUSEL CONTROLLER
+// 7. POLAROID MOMENTS GALLERY CAROUSEL CONTROLLER
   const polaroidTrack = document.getElementById('polaroidTrack');
   const galleryPrevBtn = document.getElementById('galleryPrevBtn');
   const galleryNextBtn = document.getElementById('galleryNextBtn');
   const galleryCounter = document.getElementById('galleryCounter');
   const polaroidCards = document.querySelectorAll('.polaroid-card');
 
-  if (polaroidTrack && galleryPrevBtn && galleryNextBtn && polaroidCards.length > 0) {
+  if (polaroidTrack && galleryPrevBtn && galleryNextBtn) {
     let activeIndex = 0;
     const totalPhotos = polaroidCards.length;
 
@@ -230,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Update active index indicator on manual touch swipe/drag
+    // Update active index when user swipes manually on mobile/touch screens
     let scrollTimeout;
     polaroidTrack.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
@@ -253,39 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 100);
     });
 
-    // Initial counter setup
+    // Initialize counter
     updateCounterDisplay(0);
   }
-});
-
-// 7. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT[cite: 2]
-function downloadIcs(title, startTimeIso, endTimeIso, description) {
-  const formatDateToIcs = (isoStr) => {
-    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, "");[cite: 2]
-  };
-
-  const icsContent = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Shradha and Jatin Vivah//IN",
-    "CALSCALE:GREGORIAN",
-    "BEGIN:VEVENT",
-    `SUMMARY:${title}`,
-    `DESCRIPTION:${description}`,
-    "LOCATION:DLS Divine River Resort & Spa, Mohan Chatti, Rishikesh, Uttarakhand",
-    `DTSTART:${formatDateToIcs(startTimeIso)}`,
-    `DTEND:${formatDateToIcs(endTimeIso)}`,
-    "STATUS:CONFIRMED",
-    "END:VEVENT",
-    "END:VCALENDAR"
-  ].join("\r\n");[cite: 2]
-
-  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });[cite: 2]
-  const url = URL.createObjectURL(blob);[cite: 2]
-  const tempLink = document.createElement("a");[cite: 2]
-  tempLink.href = url;[cite: 2]
-  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`);[cite: 2]
-  document.body.appendChild(tempLink);[cite: 2]
-  tempLink.click();[cite: 2]
-  document.body.removeChild(tempLink);[cite: 2]
-}
