@@ -241,51 +241,75 @@
       </div>
     </section>
 
-    <!-- Section 4: Event Itinerary -->
+    <!-- Section 4: Event Itinerary (List View) -->
     <section class="section-container itinerary-section" id="itinerary">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">मांगलिक कार्यक्रम</h3>
         <h2 class="main-section-title">Celebration Itinerary</h2>
       </div>
 
-      <div class="itinerary-cards-grid">
-        <article class="ceremony-card haldi-card">
-          <div class="ceremony-badge">Day 1 • Afternoon</div>
-          <h3 class="ceremony-title">Haldi Ceremony</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 1:00 PM</p>
-          <p class="ceremony-desc">Fragrant turmeric pastes, joyful splashes of marigold petals, and traditional folklore songs beside the Ganga.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Festive Yellows & Sunlit Mustard
+      <div class="itinerary-list-view">
+        <!-- Event 1: Haldi -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/Haldi-icon.png" alt="Haldi Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Haldi Ceremony', '2027-01-25T13:00:00', '2027-01-25T16:00:00', 'Haldi Ceremony of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">MONDAY</div>
+            <div class="event-date-num">25</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">1:00 PM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Haldi Ceremony</h3>
+            <p class="event-desc">Fragrant turmeric pastes, joyful splashes of marigold petals, and traditional folklore songs beside the Ganga.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Festive Yellows & Sunlit Mustard</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Haldi Ceremony', '2027-01-25T13:00:00', '2027-01-25T16:00:00', 'Haldi Ceremony of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
 
-        <article class="ceremony-card sangeet-card">
-          <div class="ceremony-badge">Day 1 • Evening</div>
-          <h3 class="ceremony-title">Sangeet & Tilak</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 7:00 PM</p>
-          <p class="ceremony-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Indo-Western Elegance & Glitz
+        <!-- Event 2: Sangeet -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/Sangeet-icon.png" alt="Sangeet Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Sangeet Night', '2027-01-25T19:00:00', '2027-01-25T23:59:00', 'Sangeet of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">MONDAY</div>
+            <div class="event-date-num">25</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">7:00 PM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Sangeet & Tilak</h3>
+            <p class="event-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Indo-Western Elegance & Glitz</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Sangeet Night', '2027-01-25T19:00:00', '2027-01-25T23:59:00', 'Sangeet of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
 
-        <article class="ceremony-card wedding-card featured-wedding">
-          <div class="ceremony-badge gold-badge">Day 2 • Auspicious Muhurat</div>
-          <h3 class="ceremony-title">Shubh Vivah (Wedding)</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 26th January 2027 • 10:00 AM</p>
-          <p class="ceremony-desc">The sacred Saat Phere around the Agni, Kanyadaan, and Vedic nuptials on the serene riverbanks of Rishikesh.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Royal Traditional Indian Attire
+        <!-- Event 3: Wedding -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/wedding-icon.png" alt="Wedding Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Shubh Vivah - Shradha & Jatin', '2027-01-26T10:00:00', '2027-01-26T14:30:00', 'Wedding Vows of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">TUESDAY</div>
+            <div class="event-date-num">26</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">10:00 AM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Shubh Vivah</h3>
+            <p class="event-desc">The sacred Saat Phere around the Agni, Kanyadaan, and Vedic nuptials on the serene riverbanks of Rishikesh.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Royal Traditional Indian Attire</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Shubh Vivah - Shradha & Jatin', '2027-01-26T10:00:00', '2027-01-26T14:30:00', 'Wedding Vows of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
       </div>
     </section>
