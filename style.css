@@ -788,7 +788,7 @@ body.scroll-enabled {
 /* ==============================================================
    SECTION 4: EVENT ITINERARY (ALTERNATING LIST DESIGN)
    ============================================================== */
-.itinerary-list-view {
+#itinerary .itinerary-list-view {
   display: flex;
   flex-direction: column;
   max-width: 900px;
@@ -796,7 +796,7 @@ body.scroll-enabled {
   border-top: 1px solid rgba(122, 142, 153, 0.3);
 }
 
-.itinerary-row {
+#itinerary .itinerary-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1.5fr;
   gap: 30px;
@@ -805,27 +805,28 @@ body.scroll-enabled {
   border-bottom: 1px solid rgba(122, 142, 153, 0.3);
 }
 
-.itinerary-row:last-child {
+#itinerary .itinerary-row:last-child {
   border-bottom: none;
 }
 
+/* Desktop alternating layouts */
 /* Odd rows: Icon (Left) | Date (Center) | Details (Right) */
-.itinerary-row:nth-child(odd) .col-icon { order: 1; justify-self: center; }
-.itinerary-row:nth-child(odd) .col-date { order: 2; text-align: center; }
-.itinerary-row:nth-child(odd) .col-details { order: 3; text-align: center; }
+#itinerary .itinerary-row:nth-child(odd) .col-icon { order: 1; justify-self: center; }
+#itinerary .itinerary-row:nth-child(odd) .col-date { order: 2; text-align: center; }
+#itinerary .itinerary-row:nth-child(odd) .col-details { order: 3; text-align: center; }
 
 /* Even rows: Date (Left) | Icon (Center) | Details (Right) */
-.itinerary-row:nth-child(even) .col-date { order: 1; text-align: center; }
-.itinerary-row:nth-child(even) .col-icon { order: 2; justify-self: center; }
-.itinerary-row:nth-child(even) .col-details { order: 3; text-align: center; }
+#itinerary .itinerary-row:nth-child(even) .col-date { order: 1; text-align: center; }
+#itinerary .itinerary-row:nth-child(even) .col-icon { order: 2; justify-self: center; }
+#itinerary .itinerary-row:nth-child(even) .col-details { order: 3; text-align: center; }
 
 /* Illustration Styling */
-.col-icon {
+#itinerary .col-icon {
   display: flex;
   justify-content: center;
 }
 
-.event-illustration {
+#itinerary .event-illustration {
   width: 100%;
   max-width: 180px;
   height: auto;
@@ -834,7 +835,7 @@ body.scroll-enabled {
 }
 
 /* Date Block Typography */
-.col-date {
+#itinerary .col-date {
   color: var(--color-ganga-teal);
   font-family: var(--font-display);
   display: flex;
@@ -842,26 +843,26 @@ body.scroll-enabled {
   gap: 4px;
 }
 
-.event-day {
+#itinerary .event-day {
   font-size: 1.1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-.event-date-num {
+#itinerary .event-date-num {
   font-family: var(--font-serif-hero);
   font-size: 2.8rem;
   line-height: 1;
-  color: var(--color-diya-gold-dark); /* Warmer gold for the date number */
+  color: var(--color-diya-gold-dark);
 }
 
-.event-month-year {
+#itinerary .event-month-year {
   font-size: 0.95rem;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.event-time {
+#itinerary .event-time {
   font-size: 0.9rem;
   color: var(--color-charcoal);
   font-weight: 600;
@@ -870,14 +871,14 @@ body.scroll-enabled {
 }
 
 /* Details & Theme Typography */
-.col-details {
+#itinerary .col-details {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.event-title {
-  font-family: var(--font-serif-reading); /* Cursive elegant look */
+#itinerary .event-title {
+  font-family: var(--font-serif-reading);
   font-style: italic;
   font-size: 2.4rem;
   font-weight: 600;
@@ -886,21 +887,21 @@ body.scroll-enabled {
   line-height: 1.1;
 }
 
-.event-desc {
+#itinerary .event-desc {
   font-size: 0.95rem;
   color: var(--color-charcoal);
   margin-bottom: 12px;
 }
 
-.event-theme-label {
+#itinerary .event-theme-label {
   font-family: var(--font-display);
-  color: var(--color-terracotta); /* Pinkish/Red theme text */
+  color: var(--color-terracotta);
   font-size: 1.1rem;
   font-style: italic;
   margin-bottom: 4px;
 }
 
-.event-theme-val {
+#itinerary .event-theme-val {
   font-family: var(--font-display);
   font-size: 0.9rem;
   letter-spacing: 1.5px;
@@ -909,8 +910,7 @@ body.scroll-enabled {
   margin-bottom: 20px;
 }
 
-/* Calendar Button Override for List View */
-.add-cal-btn {
+#itinerary .add-cal-btn {
   background-color: transparent;
   color: var(--color-ganga-teal);
   border: 1.5px solid var(--color-ganga-teal);
@@ -926,9 +926,35 @@ body.scroll-enabled {
   transition: all 0.3s ease;
 }
 
-.add-cal-btn:hover {
+#itinerary .add-cal-btn:hover {
   background-color: var(--color-ganga-teal);
   color: var(--color-white);
+}
+
+/* Isolated Mobile Rules for Itinerary Only */
+@media (max-width: 900px) {
+  #itinerary .itinerary-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 36px 10px;
+  }
+  
+  #itinerary .itinerary-row:nth-child(n) .col-icon { 
+    order: 1; 
+  }
+
+  #itinerary .itinerary-row:nth-child(n) .col-date { 
+    order: 2; 
+    margin-bottom: 8px; 
+  }
+
+  #itinerary .itinerary-row:nth-child(n) .col-details { 
+    order: 3; 
+  }
+  
+  #itinerary .event-illustration {
+    max-width: 140px;
+  }
 }
 
 /* Section 5: Venue & Map */
@@ -1269,21 +1295,29 @@ body.scroll-enabled {
    RESPONSIVE MEDIA QUERIES
    ============================================================== */
 @media (max-width: 900px) {
-  .itinerary-cards-grid,
-  .travel-modes-grid {
+  /* Scoped strictly to the Itinerary / Wedding Function section */
+  #itinerary .itinerary-row {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 36px 10px;
   }
   
-  .venue-card-wrapper {
-    grid-template-columns: 1fr;
+  /* Stacks elements vertically on mobile inside this section only */
+  #itinerary .itinerary-row:nth-child(n) .col-icon {
+    order: 1;
+  }
+
+  #itinerary .itinerary-row:nth-child(n) .col-date {
+    order: 2;
+    margin-bottom: 8px;
+  }
+
+  #itinerary .itinerary-row:nth-child(n) .col-details {
+    order: 3;
   }
   
-  .lineage-dual-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .lineage-center-emblem {
-    margin: 10px 0;
+  #itinerary .event-illustration {
+    max-width: 140px;
   }
 }
 
