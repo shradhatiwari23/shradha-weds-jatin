@@ -24,20 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCardOpened) return;
     isCardOpened = true;
 
-    // Unlock page scroll immediately on click
-    document.documentElement.classList.add('scroll-enabled');
-    document.body.classList.add('scroll-enabled');
-
     // Disassemble & Fade Royal Seal
     if (fastenerAssembly) {
       fastenerAssembly.classList.add('disassembled');
     }
 
-    // Swing Flaps Open after short opening delay (280ms)
+    // Trigger card flap swing
     setTimeout(() => {
       weddingCard.classList.add('opened');
       initiateAudioPlayback();
-    }, 280);
+    }, 180);
+
+    // Unlock page scroll without triggering layout repainting glitch
+    setTimeout(() => {
+      document.body.classList.add('scroll-enabled');
+    }, 600);
   }
 
   // 2. AUDIO SYNTHESIS / FALLBACK ENGINE
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // 4. RSVP FORM SUBMISSION
+  // 4. LOCAL RSVP FORM HANDLER (STANDALONE)
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', (e) => {
       e.preventDefault();
