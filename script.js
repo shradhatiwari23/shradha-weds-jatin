@@ -24,21 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCardOpened) return;
     isCardOpened = true;
 
-    // Disassemble & Fade Royal Seal
+    // Disassemble & fade royal seal prompt
     if (fastenerAssembly) {
       fastenerAssembly.classList.add('disassembled');
     }
 
-    // Trigger card flap swing
-    setTimeout(() => {
+    // Trigger flap opening on next animation frame
+    requestAnimationFrame(() => {
       weddingCard.classList.add('opened');
       initiateAudioPlayback();
-    }, 180);
+    });
 
-    // Unlock page scroll smoothly without causing reflow/layout glitch
+    // Wait until the 1.2s 3D rotation completes before allowing page scroll to prevent white flash
     setTimeout(() => {
       document.body.classList.add('scroll-enabled');
-    }, 600);
+    }, 1300);
   }
 
   // 2. AUDIO SYNTHESIS / FALLBACK ENGINE
@@ -166,16 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "ADR;TYPE=WORK:;;DLS Divine River Resort and Spa, Mohan Chatti;Rishikesh;Uttarakhand;249304;India",
         "NOTE:Shradha weds Jatin (25-26 Jan 2027) Wedding Desk",
         "END:VCARD"
-      ].join("\r\n"); //[cite: 2]
+      ].join("\r\n");[cite: 2]
 
-      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" }); //[cite: 2]
-      const url = URL.createObjectURL(blob); //[cite: 2]
-      const tempLink = document.createElement("a"); //[cite: 2]
-      tempLink.href = url; //[cite: 2]
-      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf"); //[cite: 2]
-      document.body.appendChild(tempLink); //[cite: 2]
-      tempLink.click(); //[cite: 2]
-      document.body.removeChild(tempLink); //[cite: 2]
+      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });[cite: 2]
+      const url = URL.createObjectURL(blob);[cite: 2]
+      const tempLink = document.createElement("a");[cite: 2]
+      tempLink.href = url;[cite: 2]
+      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");[cite: 2]
+      document.body.appendChild(tempLink);[cite: 2]
+      tempLink.click();[cite: 2]
+      document.body.removeChild(tempLink);[cite: 2]
     });
   }
 
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 7. GLOBAL FUNCTION: DOWNLOAD .ICS CALENDAR APPOINTMENT[cite: 2]
 function downloadIcs(title, startTimeIso, endTimeIso, description) {
   const formatDateToIcs = (isoStr) => {
-    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, ""); //[cite: 2]
+    return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, "");[cite: 2]
   };
 
   const icsContent = [
@@ -278,14 +278,14 @@ function downloadIcs(title, startTimeIso, endTimeIso, description) {
     "STATUS:CONFIRMED",
     "END:VEVENT",
     "END:VCALENDAR"
-  ].join("\r\n"); //[cite: 2]
+  ].join("\r\n");[cite: 2]
 
-  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" }); //[cite: 2]
-  const url = URL.createObjectURL(blob); //[cite: 2]
-  const tempLink = document.createElement("a"); //[cite: 2]
-  tempLink.href = url; //[cite: 2]
-  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`); //[cite: 2]
-  document.body.appendChild(tempLink); //[cite: 2]
-  tempLink.click(); //[cite: 2]
-  document.body.removeChild(tempLink); //[cite: 2]
+  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });[cite: 2]
+  const url = URL.createObjectURL(blob);[cite: 2]
+  const tempLink = document.createElement("a");[cite: 2]
+  tempLink.href = url;[cite: 2]
+  tempLink.setAttribute("download", `${title.replace(/\s+/g, "_")}.ics`);[cite: 2]
+  document.body.appendChild(tempLink);[cite: 2]
+  tempLink.click();[cite: 2]
+  document.body.removeChild(tempLink);[cite: 2]
 }
