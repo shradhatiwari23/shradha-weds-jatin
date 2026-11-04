@@ -1078,3 +1078,169 @@ body.scroll-enabled {
     min-width: 55px;
   }
 }
+/* ==============================================================
+   POLAROID MOMENTS GALLERY SECTION
+   ============================================================== */
+.moments-section {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 40px;
+}
+
+.moments-header-wrap {
+  margin-bottom: 36px;
+}
+
+.moments-eyebrow {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2.8px;
+  color: var(--color-terracotta);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.moments-title {
+  font-family: var(--font-serif-reading);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--color-charcoal);
+  line-height: 1.25;
+}
+
+.moments-subtitle {
+  font-style: italic;
+  color: var(--color-ganga-teal);
+}
+
+/* Slider Viewport & Track */
+.polaroid-slider-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 30px 10px 40px;
+}
+
+.polaroid-carousel-track {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 15px 40px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.polaroid-carousel-track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* Polaroid Card Design */
+.polaroid-card {
+  flex: 0 0 290px;
+  scroll-snap-align: center;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.polaroid-frame {
+  background: #FFFFFF;
+  padding: 14px 14px 28px 14px;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(44, 94, 99, 0.15), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(212, 163, 89, 0.25);
+  position: relative;
+}
+
+.polaroid-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+/* Subtle Polaroid Rotations */
+.polaroid-card.tilt-left {
+  transform: rotate(-3.5deg);
+}
+
+.polaroid-card.tilt-straight {
+  transform: rotate(0.5deg);
+}
+
+.polaroid-card.tilt-right {
+  transform: rotate(3.5deg);
+}
+
+.polaroid-card:hover {
+  transform: translateY(-8px) scale(1.03) rotate(0deg);
+  z-index: 5;
+}
+
+/* Controls Pill Dock */
+.polaroid-nav-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.nav-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-diya-gold);
+  background-color: var(--color-white);
+  color: var(--color-ganga-teal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.25s ease;
+}
+
+.nav-circle-btn:hover {
+  background-color: var(--color-ganga-teal);
+  color: var(--color-white);
+  border-color: var(--color-ganga-teal);
+  transform: scale(1.06);
+}
+
+.gallery-counter-pill {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: var(--color-charcoal);
+  font-weight: 600;
+  padding: 4px 10px;
+}
+
+.moments-caption-note {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-himalayan-mist);
+  margin-top: 18px;
+}
+
+@media (max-width: 600px) {
+  .moments-title {
+    font-size: 2.1rem;
+  }
+  
+  .polaroid-card {
+    flex: 0 0 240px;
+  }
+  
+  .polaroid-carousel-track {
+    padding: 10px 20px;
+  }
+}
