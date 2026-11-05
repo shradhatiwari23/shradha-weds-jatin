@@ -8,7 +8,7 @@
   <!-- Critical Asset Preloading for Instant Card Render -->
   <link rel="preload" as="image" href="assets/rishikesh-ghats-painting.png" fetchpriority="high">
   <link rel="preload" as="image" href="assets/right-flap.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/left-flap-bihar.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/left-flap.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/royal-seal.png">
 
   <!-- Google Fonts -->
@@ -122,10 +122,10 @@
         <!-- Bride Card -->
         <div class="family-card bride-card">
           <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
-          <h3 class="member-name">Ayushmati Shradha Tiwari</h3>
-          <p class="kinship-relation">Suputri of</p>
+          <h3 class="member-name">Shradha Tiwari</h3>
+          <p class="kinship-relation">Daughter of</p>
           <p class="parent-names">Mrs. Geeta Tiwari & Mr. Arvind Tiwari</p>
-          <p class="grandparent-names">Pautri of Mrs. Krishna Devi Tiwari & Late Tarak Nath Tiwari</p>
+          <p class="grandparent-names">Grand Daughter of Mrs. Krishna Devi Tiwari & Late Tarak Nath Tiwari</p>
           <div class="hometown-pill">
             <i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal
           </div>
@@ -141,9 +141,9 @@
         <!-- Groom Card -->
         <div class="family-card groom-card">
           <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
-          <h3 class="member-name">Chiranjeevi Jatin Prakash</h3>
-          <p class="kinship-relation">Suputra of</p>
-          <p class="parent-names">Mrs. Usha Kumari & Mr. Vinod Kumar</p>
+          <h3 class="member-name">Jatin Prakash</h3>
+          <p class="kinship-relation">Son of</p>
+          <p class="parent-names">Mrs. Biva Kumari & Mr. Binod Kumar</p>
           <div class="hometown-pill">
             <i class="fa-solid fa-location-dot"></i> Muzaffarpur, Bihar
           </div>
@@ -151,6 +151,66 @@
       </div>
     </section>
 
+    <!-- Section: Couple Gallery / Moments Carousel -->
+    <section class="section-container moments-section" id="moments">
+      <div class="moments-header-wrap">
+        <span class="moments-eyebrow">THE LITTLE MOMENTS THAT BROUGHT US HERE</span>
+        <h2 class="moments-title">A love story,<br><span class="moments-subtitle">one frame at a time.</span></h2>
+      </div>
+
+      <div class="polaroid-slider-wrapper">
+        <div class="polaroid-carousel-track" id="polaroidTrack">
+          <!-- Photo 1 -->
+          <div class="polaroid-card tilt-left active" data-index="1">
+            <div class="polaroid-frame">
+              <img src="assets/couple-image1.jpg" alt="Shradha and Jatin Moment 1" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="polaroid-card tilt-straight" data-index="2">
+            <div class="polaroid-frame">
+              <img src="assets/couple-image2.jpg" alt="Shradha and Jatin Moment 2" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="polaroid-card tilt-right" data-index="3">
+            <div class="polaroid-frame">
+              <img src="assets/couple-image3.jpg" alt="Shradha and Jatin Moment 3" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Photo 4 -->
+          <div class="polaroid-card tilt-left" data-index="4">
+            <div class="polaroid-frame">
+              <img src="assets/couple-image4.jpg" alt="Shradha and Jatin Moment 4" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Photo 5 -->
+          <div class="polaroid-card tilt-right" data-index="5">
+            <div class="polaroid-frame">
+              <img src="assets/couple-image5.jpeg" alt="Shradha and Jatin Moment 5" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Counter Pill -->
+      <div class="polaroid-nav-dock">
+        <button class="nav-circle-btn" id="galleryPrevBtn" aria-label="Previous Photo">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <span class="gallery-counter-pill" id="galleryCounter">01 / 05</span>
+        <button class="nav-circle-btn" id="galleryNextBtn" aria-label="Next Photo">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <p class="moments-caption-note">Cherished memories captured across the years</p>
+    </section>
+    
     <!-- Section 3: Live Countdown -->
     <section class="section-container countdown-section" id="countdown">
       <div class="section-heading-wrap">
@@ -181,51 +241,75 @@
       </div>
     </section>
 
-    <!-- Section 4: Event Itinerary -->
+   <!-- Section 4: Event Itinerary (List View) -->
     <section class="section-container itinerary-section" id="itinerary">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">मांगलिक कार्यक्रम</h3>
         <h2 class="main-section-title">Celebration Itinerary</h2>
       </div>
 
-      <div class="itinerary-cards-grid">
-        <article class="ceremony-card haldi-card">
-          <div class="ceremony-badge">Day 1 • Afternoon</div>
-          <h3 class="ceremony-title">Haldi Ceremony</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 1:00 PM</p>
-          <p class="ceremony-desc">Fragrant turmeric pastes, joyful splashes of marigold petals, and traditional folklore songs beside the Ganga.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Festive Yellows & Sunlit Mustard
+      <div class="itinerary-list-view">
+        <!-- Event 1: Haldi -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/Haldi-icon.png" alt="Haldi Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Haldi Ceremony', '2027-01-25T13:00:00', '2027-01-25T16:00:00', 'Haldi Ceremony of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">MONDAY</div>
+            <div class="event-date-num">25</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">1:00 PM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Haldi Ceremony</h3>
+            <p class="event-desc">Fragrant turmeric pastes, joyful splashes of marigold petals, and traditional folklore songs beside the Ganga.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Festive Yellows & Sunlit Mustard</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Haldi Ceremony', '2027-01-25T13:00:00', '2027-01-25T16:00:00', 'Haldi Ceremony of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
 
-        <article class="ceremony-card sangeet-card">
-          <div class="ceremony-badge">Day 1 • Evening</div>
-          <h3 class="ceremony-title">Sangeet & Cocktail</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 25th January 2027 • 7:00 PM</p>
-          <p class="ceremony-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Indo-Western Elegance & Glitz
+        <!-- Event 2: Sangeet -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/Sangeet-icon.png" alt="Sangeet Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Sangeet Night', '2027-01-25T19:00:00', '2027-01-25T23:59:00', 'Sangeet of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">MONDAY</div>
+            <div class="event-date-num">25</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">7:00 PM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Sangeet & Tilak</h3>
+            <p class="event-desc">An evening of rhythmic beats, family dance choreographies, live folk melodies, and celebration dinner under the stars.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Indo-Western Elegance & Glitz</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Sangeet Night', '2027-01-25T19:00:00', '2027-01-25T23:59:00', 'Sangeet of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
 
-        <article class="ceremony-card wedding-card featured-wedding">
-          <div class="ceremony-badge gold-badge">Day 2 • Auspicious Muhurat</div>
-          <h3 class="ceremony-title">Shubh Vivah (Wedding)</h3>
-          <p class="ceremony-time"><i class="fa-regular fa-clock"></i> 26th January 2027 • 10:00 AM</p>
-          <p class="ceremony-desc">The sacred Saat Phere around the Agni, Kanyadaan, and Vedic nuptials on the serene riverbanks of Rishikesh.</p>
-          <div class="ceremony-attire">
-            <strong>Dress Code:</strong> Royal Traditional Indian Attire
+        <!-- Event 3: Wedding -->
+        <article class="itinerary-row">
+          <div class="col-icon">
+            <img src="assets/wedding-icon.png" alt="Wedding Illustration" class="event-illustration" loading="lazy">
           </div>
-          <button class="add-cal-btn" onclick="downloadIcs('Shubh Vivah - Shradha & Jatin', '2027-01-26T10:00:00', '2027-01-26T14:30:00', 'Wedding Vows of Shradha & Jatin at DLS Divine River Resort')">
-            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-          </button>
+          <div class="col-date">
+            <div class="event-day">TUESDAY</div>
+            <div class="event-date-num">26</div>
+            <div class="event-month-year">JANUARY 2027<br><span class="event-time">10:00 AM</span></div>
+          </div>
+          <div class="col-details">
+            <h3 class="event-title">Shubh Vivah</h3>
+            <p class="event-desc">The sacred Saat Phere around the Agni, Kanyadaan, and Vedic nuptials on the serene riverbanks of Rishikesh.</p>
+            <div class="event-theme-label">Theme</div>
+            <div class="event-theme-val">Royal Traditional Indian Attire</div>
+            <button class="add-cal-btn" onclick="downloadIcs('Shubh Vivah - Shradha & Jatin', '2027-01-26T10:00:00', '2027-01-26T14:30:00', 'Wedding Vows of Shradha & Jatin at DLS Divine River Resort')">
+              <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+            </button>
+          </div>
         </article>
       </div>
     </section>
@@ -307,10 +391,6 @@
 
     <!-- Section 7: Warm Wishes & Family Tributes -->
     <section class="section-container tributes-section" id="tributes">
-      <div class="kid-quote-callout">
-        <p class="quote-hindi">"मेरे भैया और दीदी की शादी में जलूल-जलूल आना!"</p>
-        <span class="quote-author">— With love from all the children of Tiwari & Prakash families</span>
-      </div>
 
       <div class="well-wishers-box">
         <h3 class="wishes-title">आपकी प्रतीक्षा में (Awaiting Your Blessings)</h3>
@@ -318,12 +398,10 @@
         <div class="compliment-families">
           <div class="fam-col">
             <strong>Tiwari Family</strong>
-            <span>Friends & Relatives (Kolkata & Patna)</span>
           </div>
           <div class="fam-divider">•</div>
           <div class="fam-col">
             <strong>Prakash Family</strong>
-            <span>Friends & Relatives (Muzaffarpur & Delhi)</span>
           </div>
         </div>
       </div>
