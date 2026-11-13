@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitation Admin | Shradha weds Jatin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Marcellus&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --parchment: #F6EFE5;
+      --white: #FFFFFF;
+      --teal: #2C5E63;
+      --teal-dark: #1E4347;
+      --gold: #D4A359;
+      --gold-light: #F3DEB2;
+      --terracotta: #B86B5A;
+      --charcoal: #202727;
+      --mist: #7A8E99;
+      --green: #2E7D32;
+      --green-bg: #E8F5E9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--parchment);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+    }
+    h1, h2, h3 { font-family: 'Marcellus', serif; color: var(--teal); }
+
+    /* Passcode Overlay */
+    #lockScreen {
+      position: fixed; inset: 0; background: var(--parchment);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px;
+    }
+    .lock-card {
+      background: var(--white); padding: 36px; border-radius: 14px;
+      border: 1px solid var(--gold); max-width: 380px; width: 100%;
+      text-align: center; box-shadow: 0 16px 36px rgba(44,94,99,0.12);
+    }
+    .lock-card input {
+      width: 100%; padding: 12px; margin: 16px 0; font-size: 1.1rem;
+      text-align: center; letter-spacing: 4px; border: 1px solid var(--mist);
+      border-radius: 8px;
+    }
+
+    /* Main Admin Layout */
+    .container { max-width: 1120px; margin: 0 auto; padding: 24px 16px 80px; }
+    .topbar {
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      align-items: center; gap: 12px; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 1px solid rgba(122,142,153,0.3);
+    }
+    .sync-badge {
+      font-size: 0.8rem; background: var(--white); padding: 6px 12px;
+      border-radius: 20px; border: 1px solid var(--gold); color: var(--teal);
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      padding: 9px 14px; border-radius: 6px; border: none; cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; display: inline-flex;
+      align-items: center; gap: 6px; transition: 0.2s;
+    }
+    .btn-primary { background: var(--teal); color: var(--white); }
+    .btn-primary:hover { background: var(--teal-dark); }
+    .btn-gold { background: var(--gold); color: var(--charcoal); }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-whatsapp { background: #25D366; color: #fff; }
+    .btn-whatsapp:hover { background: #1ebe5d; }
+    .btn-outline { background: transparent; border: 1px solid var(--mist); color: var(--charcoal); }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-danger { background: #ffebee; color: #c62828; }
+
+    input, select, textarea {
+      padding: 10px 12px; border: 1px solid var(--mist); border-radius: 6px;
+      font-family: inherit; font-size: 0.9rem; width: 100%; background: #FAF8F5;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--teal); background: #fff; }
+
+    /* Creator & Template Grid */
+    .setup-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;
+    }
+    .panel {
+      background: var(--white); padding: 22px; border-radius: 12px;
+      border: 1px solid rgba(122,142,153,0.3); box-shadow: 0 6px 20px rgba(32,39,39,0.05);
+    }
+    .panel-title { font-size: 1.2rem; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+    .tab-btn {
+      padding: 6px 12px; border-radius: 6px; border: 1px solid var(--mist);
+      background: transparent; cursor: pointer; font-size: 0.85rem;
+    }
+    .tab-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .inline-row { display: grid; grid-template-columns: 130px 1fr; gap: 10px; margin-bottom: 12px; }
+    .instant-box {
+      margin-top: 12px; padding: 12px; background: var(--parchment);
+      border-radius: 8px; border: 1px dashed var(--gold); font-size: 0.85rem;
+    }
+
+    /* Filters & Search Bar */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+      align-items: center; margin-bottom: 20px;
+    }
+    .filter-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      padding: 7px 14px; border-radius: 20px; border: 1px solid var(--mist);
+      background: var(--white); font-size: 0.82rem; cursor: pointer; font-weight: 500;
+    }
+    .pill.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .search-export { display: flex; gap: 10px; flex-wrap: wrap; }
+    .search-export input { width: 220px; background: var(--white); }
+
+    /* Family Cards Grid */
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px;
+    }
+    .family-card {
+      background: var(--white); border-radius: 12px; padding: 18px;
+      border: 1px solid rgba(122,142,153,0.35); display: flex;
+      flex-direction: column; justify-content: space-between; gap: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .fam-title { font-size: 1.15rem; font-weight: 700; color: var(--teal); }
+    .badge {
+      font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; font-weight: 600; white-space: nowrap;
+    }
+    .badge-sent { background: var(--green-bg); color: var(--green); }
+    .badge-unsent { background: #FFF3E0; color: #E65100; }
+    .badge-opened { background: #E3F2FD; color: #1565C0; margin-left: 4px; }
+
+    .meta-info { font-size: 0.82rem; color: #555; display: flex; flex-direction: column; gap: 4px; }
+    .tracking-box {
+      background: #FAF8F5; padding: 10px; border-radius: 8px;
+      font-size: 0.78rem; color: #444; border: 1px solid #EAE2D6;
+    }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 6px; border-top: 1px solid #eee; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
+    }
+    .modal-card {
+      background: var(--white); padding: 24px; border-radius: 12px;
+      max-width: 460px; width: 100%; display: flex; flex-direction: column; gap: 12px;
+    }
+
+    @media (max-width: 820px) {
+      .setup-grid { grid-template-columns: 1fr; }
+      .search-export input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSCODE LOCK SCREEN -->
+  <div id="lockScreen">
+    <div class="lock-card">
+      <h2>Shradha & Jatin</h2>
+      <p style="font-size:0.9rem; color:var(--mist); margin-top:4px;">Invitation Manager • Enter Passcode</p>
+      <input type="password" id="passcodeInput" placeholder="••••••" onkeypress="if(event.key==='Enter') unlockAdmin()">
+      <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="unlockAdmin()">Unlock Dashboard</button>
+      <p id="lockError" style="color:#c62828; font-size:0.82rem; margin-top:10px; display:none;">Incorrect passcode. Please try again.</p>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD -->
+  <div class="container" id="adminApp" style="display:none;">
+    <div class="topbar">
+      <div>
+        <h1>Wedding Invitation Desk</h1>
+        <p style="font-size:0.85rem; color:var(--mist);">Create personalized links, send via WhatsApp & track guest opens</p>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="sync-badge" id="syncStatus"><i class="fa-solid fa-rotate"></i> Syncing...</span>
+        <button class="btn btn-outline" onclick="fetchGuests()"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+        <button class="btn btn-outline" onclick="logoutAdmin()"><i class="fa-solid fa-lock"></i></button>
+      </div>
+    </div>
+
+    <!-- CREATOR & WHATSAPP TEMPLATE -->
+    <div class="setup-grid">
+      <!-- Left: Create Invitation Links -->
+      <div class="panel">
+        <div class="panel-title">
+          <span>Create Invitation Links</span>
+          <div class="tabs" style="margin:0;">
+            <button class="tab-btn active" id="tabSingle" onclick="switchTab('single')">Single Family</button>
+            <button class="tab-btn" id="tabBulk" onclick="switchTab('bulk')">Many at Once</button>
+          </div>
+        </div>
+
+        <!-- Single Mode -->
+        <div id="singleForm">
+          <div class="inline-row">
+            <select id="singleGreeting" onchange="updateInstantPreview()">
+              <option value="Dear">Dear</option>
+              <option value="Respected">Respected</option>
+              <option value="Dearest">Dearest</option>
+              <option value="Warmest Greetings">Warmest Greetings</option>
+            </select>
+            <input type="text" id="singleName" placeholder="e.g. Sharma Family / Uncle & Aunty" oninput="updateInstantPreview()">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <input type="text" id="singlePhone" placeholder="Phone (optional, e.g. 919876543210)">
+            <input type="text" id="singleCity" placeholder="City (optional)">
+          </div>
+          <button class="btn btn-gold" style="width:100%; justify-content:center;" onclick="createSingleGuest()">
+            <i class="fa-solid fa-plus"></i> Save Family & Add Card
+          </button>
+
+          <!-- Instant Link Preview -->
+          <div class="instant-box" id="instantBox" style="display:none;">
+            <div style="font-weight:600; color:var(--teal); margin-bottom:4px;">Instant Personal Link:</div>
+            <div id="instantLinkText" style="word-break:break-all; color:#333; margin-bottom:8px;"></div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-outline" onclick="copyText(document.getElementById('instantLinkText').innerText)"><i class="fa-regular fa-copy"></i> Copy Link</button>
+              <button class="btn btn-whatsapp" onclick="quickInstantWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk Mode -->
+        <div id="bulkForm" style="display:none;">
+          <p style="font-size:0.8rem; color:var(--mist); margin-bottom:8px;">
+            Paste one family per line. Optional format: <code>Greeting | Family Name | Phone | City</code> (or just paste family names).
+          </p>
+          <textarea id="bulkInput" rows="5" placeholder="Respected | Dr. R.K. Verma & Family | 919811122233 | Delhi&#10;Dear | Ananya & Rahul | 919822233344 | Bengaluru&#10;Gupta Family"></textarea>
+          <button class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;" onclick="createBulkGuests()">
+            <i class="fa-solid fa-layer-group"></i> Generate All Links
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Editable WhatsApp Message & Sender Name -->
+      <div class="panel">
+        <div class="panel-title">
+          <span>WhatsApp Message Template</span>
+          <input type="text" id="senderNameInput" placeholder="Your Name (e.g. Shradha)" style="width:180px; font-size:0.8rem;" onchange="localStorage.setItem('senderName', this.value)">
+        </div>
+        <p style="font-size:0.8rem; color:var(--mist); margin-bottom:8px;">
+          Use <strong>{name}</strong> for the greeting + family name, and <strong>{link}</strong> for their personal invitation URL.
+        </p>
+        <textarea id="waTemplate" rows="6" onchange="localStorage.setItem('waTemplate', this.value)"></textarea>
+        <div style="margin-top:8px; font-size:0.78rem; color:var(--terracotta);">
+          <i class="fa-solid fa-image"></i> Note: When WhatsApp opens, your card thumbnail loads automatically via Open Graph tags (or attach your invite image directly in WhatsApp).
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTERS, SEARCH & CSV EXPORT -->
+    <div class="toolbar">
+      <div class="filter-pills" id="filterPills"></div>
+      <div class="search-export">
+        <input type="text" id="searchInput" placeholder="Search family, city, phone..." oninput="renderCards()">
+        <button class="btn btn-primary" onclick="downloadCSV()"><i class="fa-solid fa-file-csv"></i> Download CSV</button>
+      </div>
+    </div>
+
+    <!-- GUEST CARDS LIST -->
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- EDIT / MORE DETAILS MODAL -->
+  <div class="modal-backdrop" id="editModal">
+    <div class="modal-card">
+      <h3>Family Details</h3>
+      <input type="hidden" id="editId">
+      <div class="inline-row">
+        <select id="editGreeting">
+          <option value="Dear">Dear</option>
+          <option value="Respected">Respected</option>
+          <option value="Dearest">Dearest</option>
+          <option value="Warmest Greetings">Warmest Greetings</option>
+        </select>
+        <input type="text" id="editName" placeholder="Family Name">
+      </div>
+      <input type="text" id="editPhones" placeholder="Phone numbers (comma-separated, e.g. 919876543210, 919811122233)">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <input type="text" id="editCity" placeholder="City">
+        <input type="text" id="editGuests" placeholder="Expected Guests (e.g. 4)">
+      </div>
+      <textarea id="editNotes" rows="3" placeholder="Notes (travel, room preference, relations...)"></textarea>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveGuestDetails()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // CONFIGURATION: PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW
+    // =========================================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYTVtCgq5kRaxtBJidXTr6bVk6lojk8zrbq_yZD7IaJkC5tGWN3eomvDXbLWtcIB0/exec";
+
+    // Automatically resolves root invitation URL (strips /admin or /admin/index.html)
+    const BASE_INVITE_URL = window.location.origin + window.location.pathname.replace(/\/admin(\/index\.html)?\/?$/, "/");
+
+    const DEFAULT_TEMPLATE = `॥ श्री गणेशाय नमः ॥\n\n{name},\n\nWith the divine blessings of our elders, we joyfully invite you and your family to celebrate the wedding of *Shradha & Jatin* on *25th & 26th January 2027* at *DLS Divine River Resort & Spa, Rishikesh*.\n\nTap your personal royal invitation card here:\n{link}\n\nWarm regards,\nTiwari & Prakash Families`;
+
+    let allGuests = [];
+    let currentFilter = "all";
+    let adminPasscode = sessionStorage.getItem("adminPass") || "";
+    let refreshTimer = null;
+
+    // Initialize saved template & sender
+    document.getElementById("waTemplate").value = localStorage.getItem("waTemplate") || DEFAULT_TEMPLATE;
+    document.getElementById("senderNameInput").value = localStorage.getItem("senderName") || "Shradha";
+
+    if (adminPasscode) {
+      verifyAndLoad(adminPasscode);
+    }
+
+    function unlockAdmin() {
+      const pass = document.getElementById("passcodeInput").value.trim();
+      if (!pass) return;
+      verifyAndLoad(pass);
+    }
+
+    async function verifyAndLoad(pass) {
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=list&pass=${encodeURIComponent(pass)}`);
+        const data = await res.json();
+        if (data.status === "ok") {
+          adminPasscode = pass;
+          sessionStorage.setItem("adminPass", pass);
+          document.getElementById("lockScreen").style.display = "none";
+          document.getElementById("adminApp").style.display = "block";
+          allGuests = data.guests.reverse(); // Newest first
+          updateSyncTime();
+          renderFilters();
+          renderCards();
+          startAutoRefresh();
+        } else {
+          document.getElementById("lockError").style.display = "block";
+          sessionStorage.removeItem("adminPass");
+        }
+      } catch (err) {
+        alert("Unable to connect to Google Sheet. Check your SCRIPT_URL.");
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem("adminPass");
+      clearInterval(refreshTimer);
+      location.reload();
+    }
+
+    function startAutoRefresh() {
+      if (refreshTimer) clearInterval(refreshTimer);
+      refreshTimer = setInterval(fetchGuests, 60000); // Refreshes every 1 minute
+    }
+
+    async function fetchGuests() {
+      if (!adminPasscode) return;
+      document.getElementById("syncStatus").innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Syncing...`;
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=list&pass=${encodeURIComponent(adminPasscode)}`);
+        const data = await res.json();
+        if (data.status === "ok") {
+          allGuests = data.guests.reverse();
+          updateSyncTime();
+          renderFilters();
+          renderCards();
+        }
+      } catch (e) {
+        document.getElementById("syncStatus").innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Offline`;
+      }
+    }
+
+    function updateSyncTime() {
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById("syncStatus").innerHTML = `<i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Updated ${now}`;
+    }
+
+    function generateId(name) {
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 18);
+      const rand = Math.random().toString(36).substring(2, 6);
+      return `${slug}-${rand}`;
+    }
+
+    function buildPersonalLink(guest) {
+      const params = new URLSearchParams({
+        id: guest.id,
+        g: guest.greeting || "Dear",
+        to: guest.familyName
+      });
+      return `${BASE_INVITE_URL}?${params.toString()}`;
+    }
+
+    function buildWhatsAppMessage(guest) {
+      const template = document.getElementById("waTemplate").value;
+      const fullName = `${guest.greeting || "Dear"} ${guest.familyName}`.trim();
+      const link = buildPersonalLink(guest);
+      return template.replace(/\{name\}/g, fullName).replace(/\{link\}/g, link);
+    }
+
+    // Instant preview while typing
+    let tempInstantGuest = null;
+    function updateInstantPreview() {
+      const greeting = document.getElementById("singleGreeting").value;
+      const familyName = document.getElementById("singleName").value.trim();
+      const box = document.getElementById("instantBox");
+      if (!familyName) {
+        box.style.display = "none";
+        return;
+      }
+      if (!tempInstantGuest || tempInstantGuest.familyName !== familyName) {
+        tempInstantGuest = { id: generateId(familyName), greeting, familyName };
+      } else {
+        tempInstantGuest.greeting = greeting;
+      }
+      document.getElementById("instantLinkText").innerText = buildPersonalLink(tempInstantGuest);
+      box.style.display = "block";
+    }
+
+    function switchTab(mode) {
+      document.getElementById("tabSingle").classList.toggle("active", mode === "single");
+      document.getElementById("tabBulk").classList.toggle("active", mode === "bulk");
+      document.getElementById("singleForm").style.display = mode === "single" ? "block" : "none";
+      document.getElementById("bulkForm").style.display = mode === "bulk" ? "block" : "none";
+    }
+
+    async function createSingleGuest() {
+      const greeting = document.getElementById("singleGreeting").value;
+      const familyName = document.getElementById("singleName").value.trim();
+      const phones = document.getElementById("singlePhone").value.trim();
+      const city = document.getElementById("singleCity").value.trim();
+      if (!familyName) return alert("Please enter a family name.");
+
+      const newGuest = {
+        id: tempInstantGuest ? tempInstantGuest.id : generateId(familyName),
+        greeting, familyName, phones, city,
+        status: "Not Sent", openedCount: 0
+      };
+
+      allGuests.unshift(newGuest);
+      renderFilters();
+      renderCards();
+
+      document.getElementById("singleName").value = "";
+      document.getElementById("singlePhone").value = "";
+      document.getElementById("singleCity").value = "";
+      document.getElementById("instantBox").style.display = "none";
+      tempInstantGuest = null;
+
+      await postToSheet({ action: "add_guests", guests: [newGuest] });
+      fetchGuests();
+    }
+
+    async function quickInstantWhatsApp() {
+      if (!tempInstantGuest) return;
+      const phones = document.getElementById("singlePhone").value.trim();
+      const city = document.getElementById("singleCity").value.trim();
+      const sender = document.getElementById("senderNameInput").value.trim() || "Admin";
+      const now = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+      const cleanPhone = phones.split(",")[0].replace(/[^0-9]/g, "");
+
+      const newGuest = {
+        ...tempInstantGuest, phones, city,
+        status: "Sent", sentBy: sender, sentAt: now, sentToPhone: cleanPhone || "Manual Select", openedCount: 0
+      };
+
+      const msg = buildWhatsAppMessage(newGuest);
+      const waUrl = cleanPhone
+        ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, "_blank");
+
+      allGuests.unshift(newGuest);
+      renderFilters();
+      renderCards();
+      document.getElementById("singleName").value = "";
+      document.getElementById("instantBox").style.display = "none";
+
+      await postToSheet({ action: "add_guests", guests: [newGuest] });
+      await postToSheet({
+        action: "update_guest",
+        id: newGuest.id,
+        updates: { status: "Sent", sentBy: sender, sentAt: now, sentToPhone: cleanPhone || "Manual Select" }
+      });
+      fetchGuests();
+    }
+
+    async function createBulkGuests() {
+      const raw = document.getElementById("bulkInput").value.trim();
+      if (!raw) return;
+      const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
+      const parsed = lines.map(line => {
+        const parts = line.split("|").map(p => p.trim());
+        if (parts.length >= 2) {
+          return {
+            id: generateId(parts[1]),
+            greeting: parts[0] || "Dear",
+            familyName: parts[1],
+            phones: parts[2] || "",
+            city: parts[3] || "",
+            status: "Not Sent",
+            openedCount: 0
+          };
+        }
+        return {
+          id: generateId(line),
+          greeting: "Dear",
+          familyName: line,
+          phones: "",
+          city: "",
+          status: "Not Sent",
+          openedCount: 0
+        };
+      });
+
+      allGuests = [...parsed.reverse(), ...allGuests];
+      document.getElementById("bulkInput").value = "";
+      renderFilters();
+      renderCards();
+
+      await postToSheet({ action: "add_guests", guests: parsed });
+      fetchGuests();
+    }
+
+    async function sendOnWhatsApp(id, specificPhone = null) {
+      const guest = allGuests.find(g => g.id === id);
+      if (!guest) return;
+
+      const phoneList = String(guest.phones || "").split(",").map(p => p.trim()).filter(Boolean);
+      let targetPhone = specificPhone;
+
+      if (!targetPhone && phoneList.length > 1) {
+        const choice = prompt(`Multiple numbers saved for ${guest.familyName}:\n${phoneList.map((p, i) => `${i + 1}. ${p}`).join("\n")}\n\nEnter number to send to (or leave blank to pick in WhatsApp):`, phoneList[0]);
+        if (choice === null) return;
+        targetPhone = choice.trim();
+      } else if (!targetPhone && phoneList.length === 1) {
+        targetPhone = phoneList[0];
+      }
+
+      const cleanPhone = String(targetPhone || "").replace(/[^0-9]/g, "");
+      const msg = buildWhatsAppMessage(guest);
+      const waUrl = cleanPhone
+        ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+
+      window.open(waUrl, "_blank");
+
+      const sender = document.getElementById("senderNameInput").value.trim() || "Admin";
+      const now = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+      guest.status = "Sent";
+      guest.sentBy = sender;
+      guest.sentAt = now;
+      guest.sentToPhone = cleanPhone || "Selected in WhatsApp";
+      renderFilters();
+      renderCards();
+
+      await postToSheet({
+        action: "update_guest",
+        id: guest.id,
+        updates: {
+          status: "Sent",
+          sentBy: sender,
+          sentAt: now,
+          sentToPhone: guest.sentToPhone
+        }
+      });
+    }
+
+    async function toggleSentStatus(id) {
+      const guest = allGuests.find(g => g.id === id);
+      if (!guest) return;
+      const isCurrentlySent = guest.status === "Sent";
+      const sender = document.getElementById("senderNameInput").value.trim() || "Admin";
+      const now = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+      guest.status = isCurrentlySent ? "Not Sent" : "Sent";
+      guest.sentBy = isCurrentlySent ? "" : sender;
+      guest.sentAt = isCurrentlySent ? "" : now;
+
+      renderFilters();
+      renderCards();
+
+      await postToSheet({
+        action: "update_guest",
+        id: guest.id,
+        updates: {
+          status: guest.status,
+          sentBy: guest.sentBy,
+          sentAt: guest.sentAt
+        }
+      });
+    }
+
+    function openEditModal(id) {
+      const g = allGuests.find(item => item.id === id);
+      if (!g) return;
+      document.getElementById("editId").value = g.id;
+      document.getElementById("editGreeting").value = g.greeting || "Dear";
+      document.getElementById("editName").value = g.familyName || "";
+      document.getElementById("editPhones").value = g.phones || "";
+      document.getElementById("editCity").value = g.city || "";
+      document.getElementById("editGuests").value = g.guests || "";
+      document.getElementById("editNotes").value = g.notes || "";
+      document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("editModal").style.display = "none";
+    }
+
+    async function saveGuestDetails() {
+      const id = document.getElementById("editId").value;
+      const updates = {
+        greeting: document.getElementById("editGreeting").value,
+        familyName: document.getElementById("editName").value.trim(),
+        phones: document.getElementById("editPhones").value.trim(),
+        city: document.getElementById("editCity").value.trim(),
+        guests: document.getElementById("editGuests").value.trim(),
+        notes: document.getElementById("editNotes").value.trim()
+      };
+      const idx = allGuests.findIndex(g => g.id === id);
+      if (idx > -1) allGuests[idx] = { ...allGuests[idx], ...updates };
+      closeModal();
+      renderCards();
+      await postToSheet({ action: "update_guest", id, updates });
+    }
+
+    async function deleteGuest(id) {
+      if (!confirm("Remove this family from the list?")) return;
+      allGuests = allGuests.filter(g => g.id !== id);
+      renderFilters();
+      renderCards();
+      await postToSheet({ action: "delete_guest", id });
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      alert("Copied to clipboard!");
+    }
+
+    function nativeShare(id) {
+      const guest = allGuests.find(g => g.id === id);
+      if (!guest) return;
+      const msg = buildWhatsAppMessage(guest);
+      if (navigator.share) {
+        navigator.share({ title: "Shradha weds Jatin", text: msg });
+      } else {
+        copyText(msg);
+      }
+    }
+
+    // Filters with counts
+    function renderFilters() {
+      const counts = {
+        all: allGuests.length,
+        sent: allGuests.filter(g => g.status === "Sent").length,
+        unsent: allGuests.filter(g => g.status !== "Sent").length,
+        opened: allGuests.filter(g => Number(g.openedCount) > 0).length,
+        sent_unopened: allGuests.filter(g => g.status === "Sent" && (!g.openedCount || Number(g.openedCount) === 0)).length
+      };
+
+      const defs = [
+        { key: "all", label: `All (${counts.all})` },
+        { key: "sent", label: `Sent (${counts.sent})` },
+        { key: "unsent", label: `Not sent yet (${counts.unsent})` },
+        { key: "opened", label: `Opened (${counts.opened})` },
+        { key: "sent_unopened", label: `Sent but not opened (${counts.sent_unopened})` }
+      ];
+
+      document.getElementById("filterPills").innerHTML = defs.map(d =>
+        `<button class="pill ${currentFilter === d.key ? 'active' : ''}" onclick="setFilter('${d.key}')">${d.label}</button>`
+      ).join("");
+    }
+
+    function setFilter(key) {
+      currentFilter = key;
+      renderFilters();
+      renderCards();
+    }
+
+    function renderCards() {
+      const q = document.getElementById("searchInput").value.toLowerCase().trim();
+      const filtered = allGuests.filter(g => {
+        if (currentFilter === "sent" && g.status !== "Sent") return false;
+        if (currentFilter === "unsent" && g.status === "Sent") return false;
+        if (currentFilter === "opened" && !(Number(g.openedCount) > 0)) return false;
+        if (currentFilter === "sent_unopened" && !(g.status === "Sent" && !(Number(g.openedCount) > 0))) return false;
+
+        if (q) {
+          const hay = `${g.greeting} ${g.familyName} ${g.city} ${g.phones} ${g.notes}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("cardsGrid").innerHTML = filtered.map(g => {
+        const isSent = g.status === "Sent";
+        const opens = Number(g.openedCount) || 0;
+        const link = buildPersonalLink(g);
+        const msg = buildWhatsAppMessage(g);
+
+        return `
+          <div class="family-card">
+            <div>
+              <div class="card-header">
+                <div class="fam-title">${g.greeting || "Dear"} ${g.familyName}</div>
+                <div>
+                  <span class="badge ${isSent ? 'badge-sent' : 'badge-unsent'}">${isSent ? 'Sent' : 'Not Sent'}</span>
+                  ${opens > 0 ? `<span class="badge badge-opened">Opened ${opens}×</span>` : ''}
+                </div>
+              </div>
+
+              <div class="meta-info" style="margin-top:8px;">
+                ${g.phones ? `<div><i class="fa-solid fa-phone"></i> ${g.phones}</div>` : ''}
+                ${g.city || g.guests ? `<div><i class="fa-solid fa-location-dot"></i> ${g.city || '—'} • <i class="fa-solid fa-users"></i> ${g.guests || '?'} guests</div>` : ''}
+                ${g.notes ? `<div style="font-style:italic; color:var(--terracotta);"><i class="fa-solid fa-note-sticky"></i> ${g.notes}</div>` : ''}
+              </div>
+
+              <div class="tracking-box" style="margin-top:10px;">
+                <div><strong>Sent:</strong> ${isSent ? `By ${g.sentBy || 'Admin'} on ${g.sentAt || '—'} ${g.sentToPhone ? `(${g.sentToPhone})` : ''}` : 'Not sent yet'}</div>
+                <div style="margin-top:3px;"><strong>Opened:</strong> ${opens > 0 ? `${opens} time(s) • Last: ${g.lastOpenedAt || '—'}` : 'Not opened yet'}</div>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-whatsapp" onclick="sendOnWhatsApp('${g.id}')"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+              <button class="btn btn-outline" onclick='copyText(${JSON.stringify(msg)})'><i class="fa-regular fa-copy"></i> Msg</button>
+              <button class="btn btn-outline" onclick='copyText(${JSON.stringify(link)})'><i class="fa-solid fa-link"></i> Link</button>
+              <button class="btn btn-outline" onclick="nativeShare('${g.id}')"><i class="fa-solid fa-share-nodes"></i></button>
+              <button class="btn btn-outline" onclick="openEditModal('${g.id}')"><i class="fa-solid fa-pen"></i> Details</button>
+              <button class="btn btn-outline" onclick="toggleSentStatus('${g.id}')">${isSent ? 'Mark Unsent' : 'Mark Sent'}</button>
+              <button class="btn btn-danger" onclick="deleteGuest('${g.id}')"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function downloadCSV() {
+      const headers = ["ID", "Greeting", "Family Name", "Phones", "City", "Guests", "Notes", "Status", "Sent By", "Sent At", "Sent To Phone", "Opened Count", "Last Opened At", "Personal Link"];
+      const rows = allGuests.map(g => [
+        g.id, g.greeting, g.familyName, g.phones, g.city, g.guests, g.notes,
+        g.status, g.sentBy, g.sentAt, g.sentToPhone, g.openedCount || 0, g.lastOpenedAt || "", buildPersonalLink(g)
+      ].map(v => `"${String(v || "").replace(/"/g, '""')}"`).join(","));
+
+      const csv = [headers.join(","), ...rows].join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Shradha_Jatin_Guest_Tracking_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    async function postToSheet(payload) {
+      payload.pass = adminPasscode;
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+    }
+  </script>
+</body>
+</html>
