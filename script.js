@@ -41,19 +41,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1300);
   }
 
-  // 2. AUDIO SYNTHESIS / FALLBACK ENGINE
+  // 2. AUDIO SYNTHESIS / FALLBACK ENGINE & VISIBILITY AUTO-PAUSE
   let audioContext = null;
   let isPlayingAudio = false;
+  let wasPlayingBeforeHide = false;
 
   if (audioToggleBtn) {
     audioToggleBtn.addEventListener('click', () => {
       if (!isPlayingAudio) {
         initiateAudioPlayback();
       } else {
+        wasPlayingBeforeHide = false; // Ensure manual pause stays paused on tab/app switch
         pauseAudioPlayback();
       }
     });
   }
+
+  // Pause when switching apps/tabs or locking screen; resume when returning
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (isPlayingAudio) {
+        wasPlayingBeforeHide = true;
+        pauseAudioPlayback();
+      }
+    } else {
+      if (wasPlayingBeforeHide) {
+        wasPlayingBeforeHide = false;
+        initiateAudioPlayback();
+      }
+    }
+  });
+
+  // Extra safeguard for mobile Safari / iOS app switching & lock screen
+  window.addEventListener('pagehide', () => {
+    if (isPlayingAudio) {
+      wasPlayingBeforeHide = true;
+      pauseAudioPlayback();
+    }
+  });
+
+  window.addEventListener('pageshow', () => {
+    if (wasPlayingBeforeHide && !document.hidden) {
+      wasPlayingBeforeHide = false;
+      initiateAudioPlayback();
+    }
+  });
 
   function initiateAudioPlayback() {
     if (!weddingAudio) return;
@@ -69,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function pauseAudioPlayback() {
     if (weddingAudio) weddingAudio.pause();
-    if (audioContext) {
+    if (audioContext && audioContext.state === 'running') {
       audioContext.suspend();
     }
     isPlayingAudio = false;
