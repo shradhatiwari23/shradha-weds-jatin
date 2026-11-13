@@ -1,6 +1,8 @@
 /* ==============================================================
-   INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TIMER, RSVP & GALLERY
+   INTERACTIVE SCRIPT ENGINE: GATEFOLD, AUDIO, TRACKING, RSVP & GALLERY
    ============================================================== */
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYTVtCgq5kRaxtBJidXTr6bVk6lojk8zrbq_yZD7IaJkC5tGWN3eomvDXbLWtcIB0/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
   const weddingCard = document.getElementById('weddingCard');
@@ -15,6 +17,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isCardOpened = false;
 
+  // 0. PERSONALIZED INVITATION & OPEN TRACKING
+  const urlParams = new URLSearchParams(window.location.search);
+  const guestId = urlParams.get('id');
+  const paramGreeting = urlParams.get('g');
+  const paramName = urlParams.get('to');
+
+  function displayPersonalizedGuest(greeting, name) {
+    if (!name) return;
+    const banner = document.getElementById('personalizedGuestBanner');
+    const greetEl = document.getElementById('guestGreetingDisplay');
+    const nameEl = document.getElementById('guestNameDisplay');
+    const rsvpNameInput = document.getElementById('guestName');
+
+    if (banner && greetEl && nameEl) {
+      greetEl.textContent = greeting || 'Dear';
+      nameEl.textContent = name;
+      banner.style.display = 'inline-flex';
+    }
+    if (rsvpNameInput && !rsvpNameInput.value) {
+      rsvpNameInput.value = name;
+    }
+  }
+
+  // Immediately render from URL parameters for zero-latency display
+  if (paramName) {
+    displayPersonalizedGuest(paramGreeting, paramName);
+  }
+
+  // Record open count in Google Sheet & sync latest details
+  if (guestId && SCRIPT_URL.startsWith("http")) {
+    fetch(`${SCRIPT_URL}?action=open&id=${encodeURIComponent(guestId)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'ok' && data.guest) {
+          displayPersonalizedGuest(data.guest.greeting, data.guest.familyName);
+          const phoneInput = document.getElementById('guestPhone');
+          if (phoneInput && !phoneInput.value && data.guest.phones) {
+            phoneInput.value = String(data.guest.phones).split(',')[0].trim();
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
   // 1. GATEFOLD REVEAL INTERACTION (TAP SEAL TO OPEN)
   if (centerKnotWrapper) {
     centerKnotWrapper.addEventListener('click', triggerOpeningSequence);
@@ -24,18 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCardOpened) return;
     isCardOpened = true;
 
-    // Disassemble & fade royal seal prompt
     if (fastenerAssembly) {
       fastenerAssembly.classList.add('disassembled');
     }
 
-    // Trigger flap opening on next animation frame
     requestAnimationFrame(() => {
       weddingCard.classList.add('opened');
       initiateAudioPlayback();
     });
 
-    // Wait until the 1.2s 3D rotation completes before allowing page scroll to prevent white flash
     setTimeout(() => {
       document.body.classList.add('scroll-enabled');
     }, 1300);
@@ -51,13 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isPlayingAudio) {
         initiateAudioPlayback();
       } else {
-        wasPlayingBeforeHide = false; // Ensure manual pause stays paused on tab/app switch
+        wasPlayingBeforeHide = false;
         pauseAudioPlayback();
       }
     });
   }
 
-  // Pause when switching apps/tabs or locking screen; resume when returning
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       if (isPlayingAudio) {
@@ -72,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Extra safeguard for mobile Safari / iOS app switching & lock screen
   window.addEventListener('pagehide', () => {
     if (isPlayingAudio) {
       wasPlayingBeforeHide = true;
@@ -170,15 +211,48 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // 4. RSVP FORM SUBMISSION HANDLER
+  // 4. RSVP FORM SUBMISSION HANDLER (SAVES TO GOOGLE SHEET)
   if (rsvpForm) {
-    rsvpForm.addEventListener('submit', (e) => {
+    rsvpForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'flex';
-      rsvpForm.reset();
-      setTimeout(() => {
-        if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      const submitBtn = document.getElementById('rsvpSubmitBtn');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+      const payload = {
+        action: 'rsvp',
+        guestId: guestId || 'Direct Link',
+        name: document.getElementById('guestName').value.trim(),
+        phone: document.getElementById('guestPhone').value.trim(),
+        attendance: document.getElementById('guestAttendance').value,
+        guests: document.getElementById('guestCount').value,
+        wishes: document.getElementById('guestWishes').value.trim()
+      };
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Saving Confirmation...</span>';
+      }
+
+      try {
+        if (SCRIPT_URL.startsWith("http")) {
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+        }
+      } catch (err) {
+        console.error('RSVP sync error:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+        }
+        if (rsvpSuccessMsg) rsvpSuccessMsg.style.display = 'flex';
+        rsvpForm.reset();
+        setTimeout(() => {
+          if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
     });
   }
 
