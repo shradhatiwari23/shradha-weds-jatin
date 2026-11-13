@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shradha weds Jatin | Royal Wedding Invitation</title>
+
+  <!-- WhatsApp / Social Link Preview Image & Metadata -->
+  <meta property="og:title" content="Shradha weds Jatin | Royal Wedding Invitation">
+  <meta property="og:description" content="25th & 26th January 2027 • DLS Divine River Resort & Spa, Rishikesh. Tap to open your personal royal invitation.">
+  <meta property="og:image" content="assets/rishikesh-ghats-painting.png">
+  <meta property="og:type" content="website">
   
   <!-- Critical Asset Preloading for Instant Card Render -->
   <link rel="preload" as="image" href="assets/rishikesh-ghats-painting.png" fetchpriority="high">
@@ -44,7 +50,15 @@
           <div class="ghats-overlay-gradient"></div>
           
           <div class="reveal-content-container">
-            <span class="vedic-mini-title">॥ श्री गणेशाय नमः ॥</span>
+            <div>
+              <span class="vedic-mini-title">॥ श्री गणेशाय नमः ॥</span>
+              <!-- Personalized Guest Greeting Banner (Populated via URL params) -->
+              <div id="personalizedGuestBanner" class="personalized-guest-banner" style="display: none;">
+                <span class="guest-salutation" id="guestGreetingDisplay"></span>
+                <strong class="guest-family-name" id="guestNameDisplay"></strong>
+              </div>
+            </div>
+
             <div class="names-block">
               <h1 class="couple-hero-names">
                 <span class="bride-name">Shradha</span>
@@ -62,12 +76,10 @@
         </div>
 
         <!-- LAYER 3: 3D GATEFOLD FLAPS (WB ON LEFT, BIHAR ON RIGHT) -->
-        <!-- Left Flap: West Bengal Side -->
         <div class="gatefold-flap left-flap" id="leftFlap">
           <img src="assets/right-flap.jpg" alt="West Bengal Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
 
-        <!-- Right Flap: Bihar & Madhubani Side -->
         <div class="gatefold-flap right-flap" id="rightFlap">
           <img src="assets/left-flap.jpg" alt="Bihar Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
@@ -119,7 +131,6 @@
       </div>
 
       <div class="lineage-dual-grid">
-        <!-- Bride Card -->
         <div class="family-card bride-card">
           <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
           <h3 class="member-name">Shradha Tiwari</h3>
@@ -131,14 +142,12 @@
           </div>
         </div>
 
-        <!-- Union Kalash Icon -->
         <div class="lineage-center-emblem">
           <div class="sacred-knot-emblem">
             <i class="fa-solid fa-heart"></i>
           </div>
         </div>
 
-        <!-- Groom Card -->
         <div class="family-card groom-card">
           <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
           <h3 class="member-name">Jatin Prakash</h3>
@@ -160,35 +169,26 @@
 
       <div class="polaroid-slider-wrapper">
         <div class="polaroid-carousel-track" id="polaroidTrack">
-          <!-- Photo 1 -->
           <div class="polaroid-card tilt-left active" data-index="1">
             <div class="polaroid-frame">
               <img src="assets/couple-image1.jpg" alt="Shradha and Jatin Moment 1" loading="lazy">
             </div>
           </div>
-
-          <!-- Photo 2 -->
           <div class="polaroid-card tilt-straight" data-index="2">
             <div class="polaroid-frame">
               <img src="assets/couple-image2.jpg" alt="Shradha and Jatin Moment 2" loading="lazy">
             </div>
           </div>
-
-          <!-- Photo 3 -->
           <div class="polaroid-card tilt-right" data-index="3">
             <div class="polaroid-frame">
               <img src="assets/couple-image3.jpg" alt="Shradha and Jatin Moment 3" loading="lazy">
             </div>
           </div>
-
-          <!-- Photo 4 -->
           <div class="polaroid-card tilt-left" data-index="4">
             <div class="polaroid-frame">
               <img src="assets/couple-image4.jpg" alt="Shradha and Jatin Moment 4" loading="lazy">
             </div>
           </div>
-
-          <!-- Photo 5 -->
           <div class="polaroid-card tilt-right" data-index="5">
             <div class="polaroid-frame">
               <img src="assets/couple-image5.jpeg" alt="Shradha and Jatin Moment 5" loading="lazy">
@@ -197,7 +197,6 @@
         </div>
       </div>
 
-      <!-- Controls & Counter Pill -->
       <div class="polaroid-nav-dock">
         <button class="nav-circle-btn" id="galleryPrevBtn" aria-label="Previous Photo">
           <i class="fa-solid fa-arrow-left"></i>
@@ -241,7 +240,7 @@
       </div>
     </section>
 
-   <!-- Section 4: Event Itinerary (List View) -->
+    <!-- Section 4: Event Itinerary -->
     <section class="section-container itinerary-section" id="itinerary">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">मांगलिक कार्यक्रम</h3>
@@ -249,7 +248,6 @@
       </div>
 
       <div class="itinerary-list-view">
-        <!-- Event 1: Haldi -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/Haldi-icon.png" alt="Haldi Illustration" class="event-illustration" loading="lazy">
@@ -270,7 +268,6 @@
           </div>
         </article>
 
-        <!-- Event 2: Sangeet -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/Sangeet-icon.png" alt="Sangeet Illustration" class="event-illustration" loading="lazy">
@@ -291,7 +288,6 @@
           </div>
         </article>
 
-        <!-- Event 3: Wedding -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/wedding-icon.png" alt="Wedding Illustration" class="event-illustration" loading="lazy">
@@ -391,7 +387,6 @@
 
     <!-- Section 7: Warm Wishes & Family Tributes -->
     <section class="section-container tributes-section" id="tributes">
-
       <div class="well-wishers-box">
         <h3 class="wishes-title">आपकी प्रतीक्षा में (Awaiting Your Blessings)</h3>
         <p class="compliments-text">With best compliments & warmest regards from:</p>
@@ -409,32 +404,18 @@
 
     <!-- Section: Special Invitation from Ace -->
     <section class="vip-host-container">
-  <!-- 1. Circular Photo -->
-  <div class="vip-photo-wrapper">
-    <img 
-      src="assets/image-ace.png" 
-      alt="VIP Host" 
-      class="vip-photo-circle"
-    />
-  </div>
-
-  <!-- 2. Centered Badge -->
-  <div class="vip-pill-badge">
-    <span class="paw-icon">🐾</span>
-    <span>VIP HOST (VERY IMPORTANT PAW)</span>
-  </div>
-
-  <!-- 3. Message / Text Body -->
-  <div class="vip-text-content">
-    <p>
-      I must admit, I’m still trying to figure out who authorized all this wedding arrangement business with my nap schedule.
-    </p>
-    <p>
-      While I won't be physically attending (cat nap priorities!), I'll be supervising celebrations from home and sending loud purrs and feline blessings your way!
-      
-    </p>
-  </div>
-</section>
+      <div class="vip-photo-wrapper">
+        <img src="assets/image-ace.png" alt="VIP Host" class="vip-photo-circle" />
+      </div>
+      <div class="vip-pill-badge">
+        <span class="paw-icon">🐾</span>
+        <span>VIP HOST (VERY IMPORTANT PAW)</span>
+      </div>
+      <div class="vip-text-content">
+        <p>I must admit, I’m still trying to figure out who authorized all this wedding arrangement business with my nap schedule.</p>
+        <p>While I won't be physically attending (cat nap priorities!), I'll be supervising celebrations from home and sending loud purrs and feline blessings your way!</p>
+      </div>
+    </section>
     
     <!-- Section 8: RSVP Form -->
     <section class="section-container rsvp-section" id="rsvp">
@@ -481,7 +462,7 @@
           <textarea id="guestWishes" rows="3" placeholder="Write your auspicious blessings..."></textarea>
         </div>
 
-        <button type="submit" class="rsvp-submit-btn">
+        <button type="submit" class="rsvp-submit-btn" id="rsvpSubmitBtn">
           <span>Send Your Confirmation</span>
           <i class="fa-solid fa-paper-plane"></i>
         </button>
