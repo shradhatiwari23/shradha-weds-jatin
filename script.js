@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const weddingAudio = document.getElementById('weddingAudio');
   const rsvpForm = document.getElementById('rsvpForm');
   const rsvpSuccessMsg = document.getElementById('rsvpSuccessMsg');
-  const contactCardBtn = document.getElementById('downloadContactCard');
 
   let isCardOpened = false;
 
@@ -253,31 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (rsvpSuccessMsg) rsvpSuccessMsg.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
-    });
-  }
-
-  // 5. DOWNLOAD VCF CONTACT CARD
-  if (contactCardBtn) {
-    contactCardBtn.addEventListener('click', () => {
-      const vcfContent = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
-        "N:Prakash;Jatin;;;",
-        "FN:Shradha & Jatin Wedding Helpdesk",
-        "ORG:Tiwari & Prakash Family",
-        "TITLE:Wedding Host / Logistics",
-        "ADR;TYPE=WORK:;;DLS Divine River Resort and Spa, Mohan Chatti;Rishikesh;Uttarakhand;249304;India",
-        "NOTE:Shradha weds Jatin (25-26 Jan 2027) Wedding Desk",
-        "END:VCARD"
-      ].join("\r\n");
-      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const tempLink = document.createElement("a");
-      tempLink.href = url;
-      tempLink.setAttribute("download", "Shradha_Jatin_Wedding_Desk.vcf");
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
     });
   }
 
