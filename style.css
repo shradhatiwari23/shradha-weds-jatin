@@ -190,7 +190,20 @@ body.scroll-enabled {
   letter-spacing: 2px;
   margin-top: 6px;
 }
-
+.ganesh-icon-teal {
+  width: 46px;
+  height: 52px;
+  margin: 0.45rem auto 1rem;
+  background-color: #2C5E63; /* Ganga Teal */
+  -webkit-mask-image: url('assets/ganesh-icon.png'); 
+  mask-image: url('assets/ganesh-icon.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
 .hero-hashtag-wrapper {
   display: flex;
   flex-direction: column;
