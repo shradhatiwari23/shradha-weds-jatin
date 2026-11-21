@@ -1170,7 +1170,65 @@ body.scroll-enabled {
   color: var(--color-diya-gold);
   font-size: 1.4rem;
 }
+.family-squad-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.25rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
 
+.family-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 155px;
+}
+
+.family-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #202727; /* Riverbed Charcoal */
+  margin: 0;
+}
+
+.squad-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0.5rem 1.05rem;
+  background-color: #2C5E63; /* Ganga Teal */
+  color: #FFFFFF !important;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  border: 1px solid #D4A359; /* Diya Gold accent border */
+  box-shadow: 0 3px 10px rgba(44, 94, 99, 0.14);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.squad-btn:hover {
+  background-color: #B86B5A; /* Temple Terracotta hover */
+  transform: translateY(-1px);
+}
+
+@media (max-width: 420px) {
+  .family-squad-grid {
+    gap: 1.25rem;
+  }
+  .family-column {
+    min-width: 135px;
+  }
+  .squad-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}
 /* Pet Invitation Section (Ace) */
 .vip-host-container {
   display: flex;
