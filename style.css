@@ -191,6 +191,71 @@ body.scroll-enabled {
   margin-top: 6px;
 }
 
+.hero-hashtag-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0.75rem auto 1.1rem;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-tagline {
+  font-family: inherit;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #F6EFE5; /* Parchment Silk */
+  text-shadow: 0 1px 4px rgba(15, 25, 26, 0.85);
+  margin: 0 0 0.55rem 0;
+  letter-spacing: 0.3px;
+  max-width: 320px;
+  line-height: 1.4;
+}
+
+.hero-hashtag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(24, 44, 46, 0.55); /* Translucent Ganga Teal */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(212, 163, 89, 0.7); /* Diya Gold border */
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.hero-hashtag-pill:hover {
+  background: rgba(24, 44, 46, 0.78);
+  transform: translateY(-1px);
+}
+
+.hashtag-hindi {
+  color: #F2C97D; /* Warm Diya Gold highlight */
+  font-size: 1.12em;
+  font-weight: 600;
+  margin: 0 1px;
+}
+
+.copy-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: rgba(212, 163, 89, 0.28);
+  color: #F6EFE5;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 163, 89, 0.45);
+}
+
 /* Personalized Guest Banner inside Revealed Card */
 .personalized-guest-banner {
   display: inline-flex;
