@@ -30,7 +30,9 @@
 </head>
 <body>
 
-  <!-- Audio Background Player & Toggle -->
+  <!-- ============================================== -->
+  <!-- AUDIO BACKGROUND PLAYER & TOGGLE               -->
+  <!-- ============================================== -->
   <audio id="weddingAudio" src="assets/wedding-ambient.mp3" preload="none" loop></audio>
   <button id="audioToggle" class="audio-control-btn" aria-label="Toggle Wedding Music">
     <i class="fa-solid fa-volume-xmark" id="audioIcon"></i>
@@ -50,9 +52,11 @@
           <div class="ghats-overlay-gradient"></div>
           
           <div class="reveal-content-container">
+            <!-- Top Invocation, Teal Ganesh Icon & Dynamic Guest Banner -->
             <div>
               <span class="vedic-mini-title">॥ श्री गणेशाय नमः ॥</span>
               <div class="ganesh-icon-teal" role="img" aria-label="Lord Ganesha motif"></div>
+              
               <!-- Personalized Guest Greeting Banner (Populated via URL params) -->
               <div id="personalizedGuestBanner" class="personalized-guest-banner" style="display: none;">
                 <span class="guest-salutation" id="guestGreetingDisplay"></span>
@@ -60,6 +64,7 @@
               </div>
             </div>
             
+            <!-- Couple Names -->
             <div class="names-block">
               <h1 class="couple-hero-names">
                 <span class="bride-name">Shradha</span>
@@ -67,13 +72,18 @@
                 <span class="groom-name">Jatin</span>
               </h1>
             </div>
-            <p class="wedding-date-tagline">25th-26th January 2027 • Rishikesh, Uttarakhand</p>
 
-            <div class="hero-hashtag-wrapper">
-            <p class="hero-hashtag">#PyaarKa<span class="hashtag-hindi">जश्र</span>n</p>
-            <p class="hero-tagline">Two names, one love story, and a lifetime of celebration</p>
+            <!-- Date, Venue & Official Wedding Hashtag -->
+            <div>
+              <p class="wedding-date-tagline">25th-26th January 2027 • Rishikesh, Uttarakhand</p>
+
+              <div class="hero-hashtag-wrapper">
+                <p class="hero-hashtag">#PyaarKa<span class="hashtag-hindi">जश्र</span>n</p>
+                <p class="hero-tagline">Two names, one love story, and a lifetime of celebration</p>
+              </div>
             </div>
             
+            <!-- Scroll Down CTA -->
             <a href="#mangalacharan" class="explore-details-btn">
               <span>View Wedding Details</span>
               <i class="fa-solid fa-angle-down"></i>
@@ -81,7 +91,7 @@
           </div>
         </div>
 
-        <!-- LAYER 3: 3D GATEFOLD FLAPS  -->
+        <!-- LAYER 3: 3D GATEFOLD FLAPS -->
         <div class="gatefold-flap left-flap" id="leftFlap">
           <img src="assets/right-flap.jpg" alt="West Bengal Flap" class="flap-artwork-img" fetchpriority="high">
         </div>
@@ -109,7 +119,9 @@
   <!-- ============================================== -->
   <main class="wedding-site-body" id="siteBody">
 
-    <!-- Section 1: Vedic Mangalacharan -->
+    <!-- ============================================ -->
+    <!-- SECTION 1: VEDIC MANGALACHARAN               -->
+    <!-- ============================================ -->
     <section class="section-container mangalacharan-section" id="mangalacharan">
       <div class="om-symbol-header">
         <i class="fa-solid fa-om"></i>
@@ -129,7 +141,9 @@
       </p>
     </section>
 
-    <!-- Section 2: Couple Lineage & Family -->
+    <!-- ============================================ -->
+    <!-- SECTION 2: COUPLE LINEAGE & FAMILY           -->
+    <!-- ============================================ -->
     <section class="section-container lineage-section" id="lineage">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">शुभ विवाह सूत्र</h3>
@@ -137,6 +151,7 @@
       </div>
 
       <div class="lineage-dual-grid">
+        <!-- Bride Card -->
         <div class="family-card bride-card">
           <div class="card-accent-tag">वधू पक्ष (Kolkata, West Bengal)</div>
           <h3 class="member-name">Shradha Tiwari</h3>
@@ -148,18 +163,20 @@
           </div>
         </div>
 
+        <!-- Center Heart Emblem -->
         <div class="lineage-center-emblem">
           <div class="sacred-knot-emblem">
             <i class="fa-solid fa-heart"></i>
           </div>
         </div>
 
+        <!-- Groom Card -->
         <div class="family-card groom-card">
           <div class="card-accent-tag">वर पक्ष (Muzaffarpur, Bihar)</div>
           <h3 class="member-name">Jatin Prakash</h3>
           <p class="kinship-relation">Son of</p>
           <p class="parent-names">Mrs. Bibha Kumari & Mr. Binod Kumar</p>
-          <p class="grandparent-names">Grand Son of Late Chhathu Lal & Late Rama Devi </p>
+          <p class="grandparent-names">Grand Son of Late Chhathu Lal & Late Rama Devi</p>
           <div class="hometown-pill">
             <i class="fa-solid fa-location-dot"></i> Muzaffarpur, Bihar
           </div>
@@ -167,7 +184,9 @@
       </div>
     </section>
 
-    <!-- Section: Couple Gallery / Moments Carousel -->
+    <!-- ============================================ -->
+    <!-- SECTION 2B: COUPLE GALLERY / MOMENTS         -->
+    <!-- ============================================ -->
     <section class="section-container moments-section" id="moments">
       <div class="moments-header-wrap">
         <span class="moments-eyebrow">THE LITTLE MOMENTS THAT BROUGHT US HERE</span>
@@ -217,7 +236,9 @@
       <p class="moments-caption-note">Cherished memories captured across the years</p>
     </section>
     
-    <!-- Section 3: Live Countdown -->
+    <!-- ============================================ -->
+    <!-- SECTION 3: LIVE COUNTDOWN                    -->
+    <!-- ============================================ -->
     <section class="section-container countdown-section" id="countdown">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">शुभ घड़ी</h3>
@@ -247,7 +268,9 @@
       </div>
     </section>
 
-    <!-- Section 4: Event Itinerary -->
+    <!-- ============================================ -->
+    <!-- SECTION 4: EVENT ITINERARY                   -->
+    <!-- ============================================ -->
     <section class="section-container itinerary-section" id="itinerary">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">मांगलिक कार्यक्रम</h3>
@@ -255,6 +278,7 @@
       </div>
 
       <div class="itinerary-list-view">
+        <!-- Event 1: Haldi -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/Haldi-icon.png" alt="Haldi Illustration" class="event-illustration" loading="lazy">
@@ -275,6 +299,7 @@
           </div>
         </article>
 
+        <!-- Event 2: Sangeet -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/Sangeet-icon.png" alt="Sangeet Illustration" class="event-illustration" loading="lazy">
@@ -295,6 +320,7 @@
           </div>
         </article>
 
+        <!-- Event 3: Shubh Vivah -->
         <article class="itinerary-row">
           <div class="col-icon">
             <img src="assets/wedding-icon.png" alt="Wedding Illustration" class="event-illustration" loading="lazy">
@@ -317,7 +343,9 @@
       </div>
     </section>
 
-    <!-- Section 5: Venue & Directions -->
+    <!-- ============================================ -->
+    <!-- SECTION 5: VENUE & DIRECTIONS                -->
+    <!-- ============================================ -->
     <section class="section-container venue-section" id="venue">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">स्थान एवं मार्ग</h3>
@@ -356,7 +384,9 @@
       </div>
     </section>
 
-    <!-- Section 6: Logistics & Travel Guide -->
+    <!-- ============================================ -->
+    <!-- SECTION 6: LOGISTICS & TRAVEL GUIDE          -->
+    <!-- ============================================ -->
     <section class="section-container logistics-section" id="travel">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">ध्यान दें / यात्रा मार्गदर्शिका</h3>
@@ -389,11 +419,15 @@
       </div>
     </section>
 
-    <!-- Section 7: Warm Wishes & Family Tributes -->
+    <!-- ============================================ -->
+    <!-- SECTION 7: WARM WISHES & FAMILY SQUAD CALLS  -->
+    <!-- ============================================ -->
     <section class="section-container tributes-section" id="tributes">
       <div class="well-wishers-box">
         <h3 class="wishes-title">आपकी प्रतीक्षा में (Awaiting Your Blessings)</h3>
         <p class="compliments-text">With best compliments & warmest regards from:</p>
+
+        <!-- Row 1: Family Names -->
         <div class="compliment-families">
           <div class="fam-col">
             <strong>Tiwari Family</strong>
@@ -402,36 +436,35 @@
           <div class="fam-col">
             <strong>Prakash Family</strong>
           </div>
-          <!-- Bride's Side -->
-  <div class="family-column">
-    <a href="tel:+917980343540" class="squad-btn" onclick="downloadSquadVCard(event, 'bride')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-      </svg>
-      <span>Call Bride’s Squad</span>
-    </a>
-  </div>
+        </div>
 
-  <!-- Groom's Side -->
-  <div class="family-column">
-    <a href="tel:+918005845427" class="squad-btn" onclick="downloadSquadVCard(event, 'groom')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-      </svg>
-      <span>Call Groom’s Squad</span>
-    </a>
-  </div>
-</div>
+        <!-- Row 2: Squad Contact Buttons (Inside White Card Below Names) -->
+        <div class="family-squad-grid">
+          <!-- Bride's Squad: Anushka Tiwari -->
+          <a href="tel:+917980343540" class="squad-btn" onclick="downloadSquadVCard(event, 'bride')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>Call Bride’s Squad</span>
+          </a>
+
+          <!-- Groom's Squad: Nitin Prakash -->
+          <a href="tel:+918005845427" class="squad-btn" onclick="downloadSquadVCard(event, 'groom')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>Call Groom’s Squad</span>
+          </a>
         </div>
       </div>
     </section>
-    <div class="family-squad-grid">
-  
 
-    <!-- Section: Special Invitation from Ace -->
+    <!-- ============================================ -->
+    <!-- SECTION 7B: SPECIAL INVITATION FROM ACE      -->
+    <!-- ============================================ -->
     <section class="vip-host-container">
       <div class="vip-photo-wrapper">
-        <img src="assets/image-ace.png" alt="VIP Host" class="vip-photo-circle" />
+        <img src="assets/image-ace.png" alt="VIP Host Ace" class="vip-photo-circle" />
       </div>
       <div class="vip-pill-badge">
         <span class="paw-icon">🐾</span>
@@ -443,7 +476,9 @@
       </div>
     </section>
     
-    <!-- Section 8: RSVP Form -->
+    <!-- ============================================ -->
+    <!-- SECTION 8: RSVP FORM                         -->
+    <!-- ============================================ -->
     <section class="section-container rsvp-section" id="rsvp">
       <div class="section-heading-wrap">
         <h3 class="sub-heading-kalyanam">सादर निमंत्रण</h3>
@@ -500,7 +535,9 @@
       </form>
     </section>
 
-    <!-- Footer -->
+    <!-- ============================================ -->
+    <!-- FOOTER                                       -->
+    <!-- ============================================ -->
     <footer class="wedding-footer">
       <p class="hastakshar">Shradha & Jatin • 26.01.2027 • Rishikesh</p>
       <p class="blessing-footer">॥ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥</p>
@@ -508,6 +545,7 @@
 
   </main>
 
+  <!-- Main JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
