@@ -255,6 +255,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+   function downloadSquadVCard(event, side) {
+  event.preventDefault(); // Removes direct dialer so it saves the contact card instead
+
+  const contacts = {
+    bride: {
+      filename: "Anushka_Tiwari_Brides_Squad.vcf",
+      vcard: [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Tiwari;Anushka;;;",
+        "FN:Anushka Tiwari (Bride's Squad)",
+        "ORG:Shradha & Jatin Wedding",
+        "TITLE:Bride's Sister",
+        "TEL;TYPE=CELL,VOICE:+917980343540",
+        "NOTE:Bride's Family Contact - Shradha & Jatin Wedding (Rishikesh, Jan 25-26, 2027)",
+        "END:VCARD"
+      ].join("\n")
+    },
+    groom: {
+      filename: "Nitin_Prakash_Grooms_Squad.vcf",
+      vcard: [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Prakash;Nitin;;;",
+        "FN:Nitin Prakash (Groom's Squad)",
+        "ORG:Shradha & Jatin Wedding",
+        "TITLE:Groom's Brother",
+        "TEL;TYPE=CELL,VOICE:+918005845427",
+        "NOTE:Groom's Family Contact - Shradha & Jatin Wedding (Rishikesh, Jan 25-26, 2027)",
+        "END:VCARD"
+      ].join("\n")
+    }
+  };
+
+  const selected = contacts[side];
+  const blob = new Blob([selected.vcard], { type: "text/vcard;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = selected.filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
   // 6. POLAROID MOMENTS GALLERY CAROUSEL CONTROLLER
   const polaroidTrack = document.getElementById('polaroidTrack');
   const galleryPrevBtn = document.getElementById('galleryPrevBtn');
