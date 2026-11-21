@@ -174,6 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+   function copyHeroHashtag() {
+  navigator.clipboard.writeText("#PyaarKaजश्रn").then(() => {
+    const status = document.getElementById("hero-copy-status");
+    status.textContent = "Copied!";
+    setTimeout(() => {
+      status.textContent = "Copy";
+    }, 2000);
+  });
+}
   // 3. LIVE MUHURAT COUNTDOWN TIMER (26th January 2027, 10:00 AM IST)
   const weddingMuhuratTime = new Date('2027-01-26T10:00:00+05:30').getTime();
 
