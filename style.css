@@ -862,7 +862,7 @@ body.scroll-enabled {
 }
 
 /* ==============================================================
-   SECTION 4: EVENT ITINERARY
+   SECTION 4: EVENT ITINERARY (HALDI, SANGEET, WEDDING & RECEPTION)
    ============================================================== */
 #itinerary .itinerary-list-view {
   display: flex;
@@ -887,6 +887,7 @@ body.scroll-enabled {
   border: 1px solid rgba(212, 163, 89, 0.55); /* Diya Gold border */
   box-shadow: var(--shadow-warm);
 }
+
 /* Soft Parchment Silk readability veil over the artwork */
 #itinerary .itinerary-row::before {
   content: "";
@@ -920,8 +921,8 @@ body.scroll-enabled {
   background-image: url('assets/wedding-background.jpg');
 }
 
-#itinerary .itinerary-row:last-child {
-  border-bottom: none;
+#itinerary .itinerary-row.reception-bg {
+  background-image: url('assets/reception-background.jpg');
 }
 
 #itinerary .itinerary-row:nth-child(odd) .col-icon { order: 1; justify-self: center; }
@@ -1019,6 +1020,15 @@ body.scroll-enabled {
   margin-bottom: 20px;
 }
 
+/* Action Buttons Row (View Location + Add to Calendar) */
+#itinerary .event-action-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 #itinerary .add-cal-btn {
   background-color: transparent;
   color: var(--color-ganga-teal);
@@ -1037,6 +1047,19 @@ body.scroll-enabled {
 
 #itinerary .add-cal-btn:hover {
   background-color: var(--color-ganga-teal);
+  color: var(--color-white);
+}
+
+#itinerary .venue-map-pill {
+  background-color: var(--color-ganga-teal); /* #2C5E63 */
+  color: var(--color-white);
+  border: 1.5px solid var(--color-diya-gold); /* #D4A359 */
+  text-decoration: none;
+}
+
+#itinerary .venue-map-pill:hover {
+  background-color: var(--color-terracotta); /* #B86B5A */
+  border-color: var(--color-terracotta);
   color: var(--color-white);
 }
 
